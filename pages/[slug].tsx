@@ -1,22 +1,35 @@
 import fs from 'fs';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
+import H1 from '@/components/mdx/H1';
+import React from 'react';
+import P from '@/components/mdx/P';
+import H2 from '@/components/mdx/H2';
 
-export default function PostPage({ source }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function PostPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
+    <div>
       <Head>
-        <title>{source.frontmatter.title as string}</title>
+        <title>Title Should Be Here</title>
       </Head>
-      <MDXRemote {...source} />
-    </>
+      {props.source ? (
+        <MDXRemote
+          {...props.source}
+          components={{
+            h1: H1,
+            h2: H2,
+            p: P,
+          }}
+        />
+      ) : null}
+    </div>
   );
 }
 
 export async function getStaticPaths() {
-  return { paths: [], fallback: 'blocking' };
+  return { paths: [], fallback: false };
 }
 
 export async function getStaticProps(
@@ -38,6 +51,6 @@ export async function getStaticProps(
       source: mdxSource,
     },
     // enable ISR
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
