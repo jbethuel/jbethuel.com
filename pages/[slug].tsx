@@ -8,30 +8,6 @@ import React from 'react';
 import P from '@/components/mdx/P';
 import H2 from '@/components/mdx/H2';
 
-export default function PostPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <div>
-      <Head>
-        <title>Title Should Be Here</title>
-      </Head>
-      {props.source ? (
-        <MDXRemote
-          {...props.source}
-          components={{
-            h1: H1,
-            h2: H2,
-            p: P,
-          }}
-        />
-      ) : null}
-    </div>
-  );
-}
-
-export async function getStaticPaths() {
-  return { paths: [], fallback: false };
-}
-
 export async function getStaticProps(
   ctx: GetStaticPropsContext<{
     slug: string;
@@ -51,4 +27,28 @@ export async function getStaticProps(
       source: mdxSource,
     },
   };
+}
+
+export async function getStaticPaths() {
+  return { paths: [], fallback: false };
+}
+
+export default function PostPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <div>
+      <Head>
+        <title>Title Should Be Here</title>
+      </Head>
+      {props.source ? (
+        <MDXRemote
+          {...props.source}
+          components={{
+            h1: H1,
+            h2: H2,
+            p: P,
+          }}
+        />
+      ) : null}
+    </div>
+  );
 }

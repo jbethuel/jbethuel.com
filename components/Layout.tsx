@@ -1,8 +1,6 @@
 import React from 'react';
 import { Header } from './Header';
-import { Footer } from './Footer';
 import { ThemeProvider } from './ThemeProvider';
-import SectionContainer from './SectionProvider';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -11,13 +9,10 @@ type LayoutProps = {
 export default function Layout(props: LayoutProps) {
   return (
     <ThemeProvider>
-      <SectionContainer>
+      <div className="max-w-2xl mx-auto py-10 px-4">
         <Header />
-        <div className="flex h-screen flex-col justify-between font-sans">
-          <main className="mb-auto">{props.children}</main>
-        </div>
-        <Footer />
-      </SectionContainer>
+        <main className="mt-2">{props.children}</main>
+      </div>
     </ThemeProvider>
   );
 }

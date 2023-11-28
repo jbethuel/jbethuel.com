@@ -1,3 +1,4 @@
+import { CustomLink } from '@/components/CustomLink';
 import { PostPreview } from '@/types/post';
 import fs from 'fs';
 import { InferGetStaticPropsType } from 'next';
@@ -9,7 +10,8 @@ export default function Home({ postPreviews }: InferGetStaticPropsType<typeof ge
     <ul>
       {postPreviews.map((postPreview, i) => (
         <li key={i}>
-          {postPreview.slug} - {postPreview.title}
+          <CustomLink href={`/${postPreview.slug}`}>{postPreview.slug}</CustomLink>
+          <br /> {postPreview.title}
         </li>
       ))}
     </ul>
