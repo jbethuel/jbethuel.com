@@ -1,19 +1,73 @@
 ---
-title: How to Choose the Right Cloud Provider for Your Business
-description: A guide to help you choose the best cloud provider that fits the specific needs and goals of your business, considering security, scalability, and cost.
-previewImage: https://source.unsplash.com/pVr6wvUneMk/1920x1280
+title: Images in Next.js
+description: Hahahaha
+date: '2020-11-11'
+tags: ['next js', 'guide']
+draft: false
+summary: 'In this article we introduce adding images in the tailwind starter blog and the benefits and limitations of the next/image component.'
+authors: ['sparrowhawk']
 ---
 
-# How to Choose the Right Cloud Provider for Your Business
+# Introduction
 
-Lorem ipsum dolor sit amet, **consectetur adipiscing elit**. Fusce semper facilisis justo, sed hendrerit risus varius eu. Vivamus a porttitor lacus, viverra vulputate ex. Donec id magna varius, facilisis elit nec, pharetra risus. Nulla laoreet aliquet mi vel consectetur. Quisque suscipit nisi eget tincidunt faucibus. Ut eros diam, cursus vel scelerisque ornare, volutpat aliquet nulla. Etiam molestie, felis vitae rutrum consectetur, orci sem condimentum lectus, condimentum facilisis nibh mauris ut leo. Duis neque nunc, molestie in lectus quis, ultricies ullamcorper neque.
+The tailwind starter blog has out of the box support for [Next.js's built-in image component](https://nextjs.org/docs/api-reference/next/image) and automatically swaps out default image tags in markdown or mdx documents to use the Image component provided.
 
-## What Is Lorem Ipsum?
+# Usage
 
-Praesent vitae arcu vitae felis egestas molestie non id nulla. Phasellus blandit interdum tellus. Nunc luctus risus tincidunt finibus elementum. Nunc ut ligula purus. Phasellus eget urna quis metus hendrerit tempus. Donec laoreet malesuada tincidunt. Nam eu purus eu elit egestas accumsan. Quisque facilisis pretium ipsum at fringilla. Quisque maximus velit blandit massa commodo tristique. Curabitur scelerisque aliquam vestibulum. Aliquam molestie metus risus.
+To use in a new page route / javascript file, simply import the image component and call it e.g.
 
-Morbi hendrerit iaculis feugiat. Mauris pharetra porttitor cursus. In hac habitasse platea dictumst. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed vitae justo quis dolor tristique congue. Nunc quam elit, maximus eu auctor vitae, scelerisque non odio. Mauris sit amet tristique nulla, et eleifend dolor. Duis dapibus molestie lorem quis consectetur. Suspendisse elementum, nunc a semper aliquet, ligula dolor commodo ligula, ut porttitor augue massa a tortor. Duis tincidunt venenatis pharetra. Fusce varius nulla sed lacus mollis, eget ultrices justo ullamcorper. Quisque dignissim elit leo, nec consequat augue ultrices quis. Proin vehicula magna eget purus facilisis, sed consequat dolor vulputate.
+```js
+import Image from 'next/image';
 
-## Conclusion
+function Home() {
+  return (
+    <>
+      <h1>My Homepage</h1>
+      <Image src="/me.png" alt="Picture of the author" width={500} height={500} />
+      <p>Welcome to my homepage!</p>
+    </>
+  );
+}
 
-Morbi luctus nunc pretium nisl rhoncus ultricies. In vitae suscipit nisl. Vivamus aliquam sem sit amet purus vestibulum, ut semper elit consequat. Nunc pellentesque velit in nunc tempus consequat. Nunc rutrum dui a dolor euismod ultrices. In sollicitudin elit vitae diam viverra ultrices. Cras tempus faucibus elit, nec eleifend sem venenatis vel. Morbi ut arcu elementum, mattis quam in, tincidunt mauris. Nullam pretium est nunc. Integer pretium massa id mauris iaculis maximus fermentum in mauris. Duis pulvinar tincidunt libero, eget ultricies velit laoreet quis. Morbi nec tristique dolor, nec auctor urna. Cras tristique ligula in fringilla tempor. Fusce sed lacus nec sapien egestas tristique.
+export default Home;
+```
+
+For a markdown file, the default image tag can be used and the default `img` tag gets replaced by the `Image` component in the build process.
+
+Assuming we have a file called `ocean.jpg` in `data/img/ocean.jpg`, the following line of code would generate the optimized image.
+
+```
+![ocean](/static/images/ocean.jpg)
+```
+
+Alternatively, since we are using mdx, we can just use the image component directly! Note, that you would have to provide a fixed width and height. The `img` tag method parses the dimension automatically.
+
+```js
+<Image alt="ocean" src="/static/images/ocean.jpg" width={256} height={128} />
+```
+
+_Note_: If you try to save the image, it is in webp format, if your browser supports it!
+
+![ocean](/static/images/ocean.jpeg)
+
+Photo by [YUCAR FotoGrafik](https://unsplash.com/@yucar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+on [Unsplash](https://unsplash.com/s/photos/sea?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+# Benefits
+
+- Smaller image size with Webp (~30% smaller than jpeg)
+- Responsive images - the correct image size is served based on the user's viewport
+- Lazy loading - images load as they are scrolled to the viewport
+- Avoids [Cumulative Layout Shift](https://web.dev/cls/)
+- Optimization on demand instead of build-time - no increase in build time!
+
+# Limitations
+
+- Due to the reliance on `next/image`, unless you are using an external image CDN like Cloudinary or Imgix, it is practically required to use Vercel for hosting. This is because the component acts like a serverless function that calls a highly optimized image CDN.
+
+  If you do not want to be tied to Vercel, you can remove `imgToJsx` in `remarkPlugins` in `lib/mdx.js`. This would avoid substituting the default `img` tag.
+
+  Alternatively, one could wait for image optimization at build time to be supported. A different library, [next-optimized-images](https://github.com/cyrilwanner/next-optimized-images) does that, although it requires transforming the images through webpack which is not done here.
+
+- Images from external links are not passed through `next/image`
+- All images have to be stored in the `public` folder e.g `/static/images/ocean.jpeg`

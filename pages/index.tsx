@@ -5,16 +5,29 @@ import { InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 
-export default function Home({ postPreviews }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home(props: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { postPreviews } = props;
+
   return (
-    <ul>
-      {postPreviews.map((postPreview, i) => (
-        <li key={i}>
-          <CustomLink href={`/${postPreview.slug}`}>{postPreview.slug}</CustomLink>
-          <br /> {postPreview.title}
-        </li>
-      ))}
-    </ul>
+    <div>
+      <h2>Latest</h2>
+      <h3>My latest thoughts or whatever I am thinking about</h3>
+      <hr className="mt-4 mb-4" />
+      <ul>
+        {postPreviews.map((postPreview, i) => (
+          <li key={i} className="mb-4">
+            <article>
+              <h2>
+                <CustomLink href={`/${postPreview.slug}`}>{postPreview.title}</CustomLink>
+              </h2>
+              <p>May 5, 2023</p>
+              <p>{postPreview.description}...</p>
+            </article>
+            {postPreviews.length - 1 !== i ? <hr className="mt-4" /> : null}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

@@ -4,7 +4,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
 import H1 from '@/components/mdx/H1';
-import React from 'react';
+import React, { Fragment } from 'react';
 import P from '@/components/mdx/P';
 import H2 from '@/components/mdx/H2';
 
@@ -35,7 +35,7 @@ export async function getStaticPaths() {
 
 export default function PostPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div>
+    <Fragment>
       <Head>
         <title>Title Should Be Here</title>
       </Head>
@@ -49,6 +49,6 @@ export default function PostPage(props: InferGetStaticPropsType<typeof getStatic
           }}
         />
       ) : null}
-    </div>
+    </Fragment>
   );
 }
