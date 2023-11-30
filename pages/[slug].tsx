@@ -1,12 +1,13 @@
+import { H1, H2, H3, H4 } from '@/components/mdx/Headings';
+import P from '@/components/mdx/P';
+import { Pre } from '@/components/mdx/Pre';
+import { Post } from '@/types/post';
 import fs from 'fs';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
 import Head from 'next/head';
-import H1 from '@/components/mdx/H1';
-import React, { Fragment } from 'react';
-import P from '@/components/mdx/P';
-import H2 from '@/components/mdx/H2';
+import { Fragment } from 'react';
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext<{
@@ -15,16 +16,12 @@ export async function getStaticProps(
 ) {
   const { slug } = ctx.params!;
 
-  // retrieve the MDX blog post file associated
-  // with the specified slug parameter
   const postFile = fs.readFileSync(`./_posts/${slug}.mdx`);
-
-  // read the MDX serialized content along with the frontmatter
-  // from the .mdx blog post file
   const mdxSource = await serialize(postFile, { parseFrontmatter: true });
   return {
     props: {
       source: mdxSource,
+      frontmatter: mdxSource.frontmatter as Post,
     },
   };
 }
@@ -34,18 +31,32 @@ export async function getStaticPaths() {
 }
 
 export default function PostPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { source, frontmatter } = props;
+
+  if (!frontmatter) return null;
+
+  const { title, date } = frontmatter;
+
   return (
     <Fragment>
       <Head>
-        <title>Title Should Be Here</title>
+        <title>{title}</title>
       </Head>
-      {props.source ? (
+      <div className="text-center">
+        <p className="font-light text-sm">{date}</p>
+        <H1>{title}</H1>
+      </div>
+      <hr className="mt-4 mb-4" />
+      {source ? (
         <MDXRemote
           {...props.source}
           components={{
             h1: H1,
             h2: H2,
+            h3: H3,
+            h4: H4,
             p: P,
+            pre: Pre,
           }}
         />
       ) : null}

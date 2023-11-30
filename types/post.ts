@@ -1,6 +1,6 @@
-export type PostPreview = {
+export type Post = {
   title: string;
   description: string;
-  previewImage: string;
   slug: string;
+  date: string;
 };
