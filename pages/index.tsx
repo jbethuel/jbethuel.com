@@ -1,4 +1,5 @@
 import { CustomLink } from '@/components/CustomLink';
+import { Intro } from '@/components/Intro';
 import { Post } from '@/types/post';
 import fs from 'fs';
 import { InferGetStaticPropsType } from 'next';
@@ -10,14 +11,12 @@ export default function Home(props: InferGetStaticPropsType<typeof getStaticProp
 
   return (
     <section>
-      <h2 className="font-semibold">Latest</h2>
-      <h3 className="font-light text-sm">My latest thoughts or whatever I am thinking about</h3>
-      <hr className="mt-4 mb-4" />
+      <Intro title="Latest" subTitle="My latest thoughts or whatever I am thinking about" />
       <ul>
         {postPreviews.map((postPreview, i) => {
           const { slug, title, description, date } = postPreview;
           return (
-            <li key={i} className="mb-4">
+            <li key={i} className="mb-6">
               <article>
                 <h2 className="font-semibold">
                   <CustomLink href={`/${slug}`}>{title}</CustomLink>
@@ -25,7 +24,6 @@ export default function Home(props: InferGetStaticPropsType<typeof getStaticProp
                 <p className="font-light text-sm mb-2">{date}</p>
                 <p className="font-medium">{description}...</p>
               </article>
-              {postPreviews.length - 1 !== i ? <hr className="mt-4" /> : null}
             </li>
           );
         })}

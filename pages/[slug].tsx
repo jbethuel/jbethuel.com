@@ -1,12 +1,14 @@
+import { Intro } from '@/components/Intro';
 import { H1, H2, H3, H4 } from '@/components/mdx/Headings';
 import P from '@/components/mdx/P';
 import { Pre } from '@/components/mdx/Pre';
+import { seoConfig } from '@/config/seo';
 import { Post } from '@/types/post';
 import fs from 'fs';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import { Fragment } from 'react';
 
 export async function getStaticProps(
@@ -35,18 +37,12 @@ export default function PostPage(props: InferGetStaticPropsType<typeof getStatic
 
   if (!frontmatter) return null;
 
-  const { title, date } = frontmatter;
+  const { title, description, date } = frontmatter;
 
   return (
     <Fragment>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      <div className="text-center">
-        <p className="font-light text-sm">{date}</p>
-        <H1>{title}</H1>
-      </div>
-      <hr className="mt-4 mb-4" />
+      <NextSeo {...seoConfig} title={`${title} - ${description}`} />
+      <Intro title={title} subTitle={date} />
       {source ? (
         <MDXRemote
           {...props.source}
