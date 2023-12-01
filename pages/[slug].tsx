@@ -22,6 +22,7 @@ export async function getStaticProps(
   const mdxSource = await serialize(postFile, { parseFrontmatter: true });
   return {
     props: {
+      key: slug,
       source: mdxSource,
       frontmatter: mdxSource.frontmatter as Post,
     },
