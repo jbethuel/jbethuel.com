@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "yarn prettier:check && next lint",
+    "prettier:check": "prettier --check ./components ./config ./css ./pages ./types"
   },
   "dependencies": {
     "github-slugger": "^2.0.0",
