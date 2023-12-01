@@ -9,6 +9,7 @@ import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import { NextSeo } from 'next-seo';
+import path from 'path';
 import { Fragment } from 'react';
 
 export async function getStaticProps(
@@ -22,7 +23,6 @@ export async function getStaticProps(
   const mdxSource = await serialize(postFile, { parseFrontmatter: true });
   return {
     props: {
-      key: slug,
       source: mdxSource,
       frontmatter: mdxSource.frontmatter as Post,
     },
@@ -30,7 +30,17 @@ export async function getStaticProps(
 }
 
 export async function getStaticPaths() {
-  return { paths: [], fallback: false };
+  const mdxFiles = fs.readdirSync('_posts').filter((postFilePath) => {
+    return path.extname(postFilePath).toLowerCase() === '.mdx';
+  });
+
+  const paths = mdxFiles.map((file) => ({
+    params: {
+      slug: file.split('.mdx')[0], // get the fileName (without .mdx extension)
+    },
+  }));
+
+  return { paths, fallback: false };
 }
 
 export default function PostPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
