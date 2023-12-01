@@ -3,7 +3,7 @@ name: Check and build
 on: push
 
 jobs:
-  webapp_job:
+  lint_build_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
@@ -23,4 +23,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages publish out --project-name jbethuel.com
+          command: pages publish out --project-name jbethuel
