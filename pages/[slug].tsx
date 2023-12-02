@@ -2,14 +2,13 @@ import { Intro } from '@/components/Intro';
 import { H1, H2, H3, H4 } from '@/components/mdx/Headings';
 import P from '@/components/mdx/P';
 import { Pre } from '@/components/mdx/Pre';
+import { getAllMdxFiles, readMdxFile } from '@/config/mdxFileHelper';
 import { seoConfig } from '@/config/seo';
 import { Post } from '@/types/post';
-import fs from 'fs';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import { NextSeo } from 'next-seo';
-import path from 'path';
 import { Fragment } from 'react';
 
 export async function getStaticProps(
@@ -19,8 +18,8 @@ export async function getStaticProps(
 ) {
   const { slug } = ctx.params!;
 
-  const postFile = fs.readFileSync(`./_posts/${slug}.mdx`);
-  const mdxSource = await serialize(postFile, { parseFrontmatter: true });
+  const file = readMdxFile({ fileName: slug });
+  const mdxSource = await serialize(file, { parseFrontmatter: true });
   return {
     props: {
       source: mdxSource,
@@ -30,14 +29,8 @@ export async function getStaticProps(
 }
 
 export async function getStaticPaths() {
-  const mdxFiles = fs.readdirSync('_posts').filter((postFilePath) => {
-    return path.extname(postFilePath).toLowerCase() === '.mdx';
-  });
-
-  const paths = mdxFiles.map((file) => ({
-    params: {
-      slug: file.split('.mdx')[0], // get the fileName (without .mdx extension)
-    },
+  const paths = getAllMdxFiles({ includeFileExtension: false }).map((file) => ({
+    params: { slug: file },
   }));
 
   return { paths, fallback: false };
