@@ -1,4 +1,5 @@
 import { Intro } from '@/components/Intro';
+import B from '@/components/mdx/B';
 import { H1, H2, H3, H4 } from '@/components/mdx/Headings';
 import P from '@/components/mdx/P';
 import { Pre } from '@/components/mdx/Pre';

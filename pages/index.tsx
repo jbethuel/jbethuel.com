@@ -17,10 +17,10 @@ export default function Home(props: InferGetStaticPropsType<typeof getStaticProp
           return (
             <li key={i} className="mb-6">
               <article>
-                <h2 className="font-semibold">
+                <h2 className="font-semibold underline underline-offset-8">
                   <CustomLink href={`/${slug}`}>{title}</CustomLink>
                 </h2>
-                <p className="font-light text-sm mb-2">{date}</p>
+                <p className="font-light text-sm mt-2 mb-2">{date}</p>
                 <p className="font-medium">{description}...</p>
               </article>
             </li>

@@ -4,9 +4,14 @@ import path from 'path';
 const folderName = '_posts';
 
 export function getAllMdxFiles(options: { includeFileExtension: boolean }) {
-  const postFilePaths = fs.readdirSync(folderName).filter((postFilePath) => {
+  let postFilePaths = fs.readdirSync(folderName).filter((postFilePath) => {
     return path.extname(postFilePath).toLowerCase() === '.mdx';
   });
+
+  // only show playground.mdx when in development
+  if (process.env.NODE_ENV !== 'development') {
+    postFilePaths = postFilePaths.filter((e) => !e.includes('playground'));
+  }
 
   if (options.includeFileExtension) {
     return postFilePaths;

@@ -30,6 +30,9 @@ body {
   h2 {
     @apply text-xl;
   }
+  strong {
+    @apply font-extrabold;
+  }
 }
 
 pre {
