@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme: theme } = useTheme();
 
   const isDarkTheme = theme === 'dark';
 
@@ -20,7 +20,7 @@ export function ThemeSwitch() {
   return (
     <button
       aria-label="Toggle Dark Mode"
-      onClick={() => setTheme(theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       style={{ height: 25, width: 25 }}
     >
       <Image

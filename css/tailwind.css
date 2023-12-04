@@ -40,3 +40,8 @@ pre {
   padding: 20px;
   overflow: auto;
 }
+
+.hover-images:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
