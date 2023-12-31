@@ -7,9 +7,7 @@ export function Header() {
   const router = useRouter();
 
   const isCurrentRoute = useCallback(
-    (route: string) => {
-      return router.pathname === route;
-    },
+    (route: string) => router.pathname === route,
     [router.pathname],
   );
 
