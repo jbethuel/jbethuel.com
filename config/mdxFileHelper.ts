@@ -13,6 +13,9 @@ export function getAllMdxFiles(options: { includeFileExtension: boolean }) {
     postFilePaths = postFilePaths.filter((e) => !e.includes('playground'));
   }
 
+  // exclude draft blog posts
+  postFilePaths = postFilePaths.filter((e) => !e.startsWith('__'));
+
   if (options.includeFileExtension) {
     return postFilePaths;
   }
