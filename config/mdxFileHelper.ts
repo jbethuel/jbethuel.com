@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { isDevelopment } from './helpers';
 
 const folderName = '_posts';
 
@@ -8,13 +9,12 @@ export function getAllMdxFiles(options: { includeFileExtension: boolean }) {
     return path.extname(postFilePath).toLowerCase() === '.mdx';
   });
 
-  // only show playground.mdx when in development
-  if (process.env.NODE_ENV !== 'development') {
-    postFilePaths = postFilePaths.filter((e) => !e.includes('playground'));
-  }
+  console.log('isDevelopment', isDevelopment);
 
-  // exclude draft blog posts
-  postFilePaths = postFilePaths.filter((e) => !e.startsWith('__'));
+  // only show playground.mdx & __(xx) when in development
+  if (!isDevelopment) {
+    postFilePaths = postFilePaths.filter((e) => !e.includes('playground') && !e.startsWith('__'));
+  }
 
   if (options.includeFileExtension) {
     return postFilePaths;

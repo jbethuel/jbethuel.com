@@ -3,16 +3,9 @@ import { Intro } from '@/components/Intro';
 import { galleryData } from '@/config/helpers';
 import { seoConfig } from '@/config/seo';
 import { NextSeo } from 'next-seo';
-import { Fragment, useCallback } from 'react';
-
-const paths = galleryData.map((e) => e.url);
-console.log('paths', paths);
+import { Fragment } from 'react';
 
 export default function Gallery() {
-  const onClickImage = useCallback((imageUrl: string) => {
-    window.open(imageUrl);
-  }, []);
-
   return (
     <Fragment>
       <NextSeo {...seoConfig} title={`${seoConfig.title} - Gallery`} />
@@ -29,7 +22,6 @@ export default function Gallery() {
                   key={index}
                   src={url}
                   alt={alt}
-                  // onClick={() => onClickImage(url)}
                 />
               </CustomLink>
             );

@@ -58,5 +58,5 @@ const dummy = Array.from({ length: 100 }).map(() => ({
   alt: Math.random.toString(),
 }));
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+export const isDevelopment = process.env.NODE_ENV === 'development';
 export const galleryData = imageUrls;
