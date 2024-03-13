@@ -9,8 +9,6 @@ export function getAllMdxFiles(options: { includeFileExtension: boolean }) {
     return path.extname(postFilePath).toLowerCase() === '.mdx';
   });
 
-  console.log('isDevelopment', isDevelopment);
-
   // only show playground.mdx & __(xx) when in development
   if (!isDevelopment) {
     postFilePaths = postFilePaths.filter((e) => !e.includes('playground') && !e.startsWith('__'));
