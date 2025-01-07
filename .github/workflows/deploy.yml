@@ -4,6 +4,7 @@ on: push
 
 jobs:
   lint_build_deploy:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
