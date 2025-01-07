@@ -1,11 +1,11 @@
-import { portalId } from '@/config/helpers';
-import React from 'react';
-import { Header } from './Header';
-import { ThemeProvider } from './ThemeProvider';
+import { portalId } from "@/config/helpers"
+import React from "react"
+import { Header } from "./Header"
+import { ThemeProvider } from "./ThemeProvider"
 
 type LayoutProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export default function Layout(props: LayoutProps) {
   return (
@@ -17,5 +17,5 @@ export default function Layout(props: LayoutProps) {
       </div>
       <div className="px-4 md:px-4 lg:px-8 mx-auto" id={portalId} />
     </ThemeProvider>
-  );
+  )
 }

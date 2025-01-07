@@ -1,9 +1,9 @@
-import { CustomLink } from '@/components/CustomLink';
-import { Intro } from '@/components/Intro';
-import { galleryData } from '@/config/helpers';
-import { seoConfig } from '@/config/seo';
-import { NextSeo } from 'next-seo';
-import { Fragment } from 'react';
+import { CustomLink } from "@/components/CustomLink"
+import { Intro } from "@/components/Intro"
+import { galleryData } from "@/config/helpers"
+import { seoConfig } from "@/config/seo"
+import { NextSeo } from "next-seo"
+import { Fragment } from "react"
 
 export default function Gallery() {
   return (
@@ -24,10 +24,10 @@ export default function Gallery() {
                   alt={alt}
                 />
               </CustomLink>
-            );
+            )
           })}
         </div>
       </section>
     </Fragment>
-  );
+  )
 }

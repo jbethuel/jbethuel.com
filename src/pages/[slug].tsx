@@ -1,48 +1,48 @@
-import { Intro } from '@/components/Intro';
-import A from '@/components/mdx/A';
-import { H1, H2, H3, H4 } from '@/components/mdx/Headings';
-import P from '@/components/mdx/P';
-import { Pre } from '@/components/mdx/Pre';
-import { getAllMdxFiles, readMdxFile } from '@/config/mdxFileHelper';
-import { seoConfig } from '@/config/seo';
-import { Post } from '@/types/post';
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { MDXRemote } from 'next-mdx-remote';
-import { serialize } from 'next-mdx-remote/serialize';
-import { NextSeo } from 'next-seo';
-import { Fragment } from 'react';
+import { Intro } from "@/components/Intro"
+import A from "@/components/mdx/A"
+import { H1, H2, H3, H4 } from "@/components/mdx/Headings"
+import P from "@/components/mdx/P"
+import { Pre } from "@/components/mdx/Pre"
+import { getAllMdxFiles, readMdxFile } from "@/config/mdxFileHelper"
+import { seoConfig } from "@/config/seo"
+import { Post } from "@/types/post"
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
+import { MDXRemote } from "next-mdx-remote"
+import { serialize } from "next-mdx-remote/serialize"
+import { NextSeo } from "next-seo"
+import { Fragment } from "react"
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext<{
-    slug: string;
+    slug: string
   }>,
 ) {
-  const { slug } = ctx.params!;
+  const { slug } = ctx.params!
 
-  const file = readMdxFile({ fileName: slug });
-  const mdxSource = await serialize(file, { parseFrontmatter: true });
+  const file = readMdxFile({ fileName: slug })
+  const mdxSource = await serialize(file, { parseFrontmatter: true })
   return {
     props: {
       source: mdxSource,
       frontmatter: mdxSource.frontmatter as Post,
     },
-  };
+  }
 }
 
 export async function getStaticPaths() {
   const paths = getAllMdxFiles({ includeFileExtension: false }).map((file) => ({
     params: { slug: file },
-  }));
+  }))
 
-  return { paths, fallback: false };
+  return { paths, fallback: false }
 }
 
 export default function PostPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { source, frontmatter } = props;
+  const { source, frontmatter } = props
 
-  if (!frontmatter) return null;
+  if (!frontmatter) return null
 
-  const { title, description, date } = frontmatter;
+  const { title, description, date } = frontmatter
 
   return (
     <Fragment>
@@ -60,19 +60,19 @@ export default function PostPage(props: InferGetStaticPropsType<typeof getStatic
             pre: Pre,
             a: A,
             img: (props) => {
-              if (props.alt?.includes('IMG')) {
+              if (props.alt?.includes("IMG")) {
                 // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-                return <img {...props} />;
+                return <img {...props} />
               }
               return (
                 <video width="100%" height="100%" muted controls>
                   <source src={props.src} type="video/mp4" />
                 </video>
-              );
+              )
             },
           }}
         />
       ) : null}
     </Fragment>
-  );
+  )
 }

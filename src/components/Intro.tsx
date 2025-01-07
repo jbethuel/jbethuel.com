@@ -1,13 +1,13 @@
-import { Fragment } from 'react';
-import { H1 } from './mdx/Headings';
+import { Fragment } from "react"
+import { H1 } from "./mdx/Headings"
 
 type IntroProps = {
-  title: string;
-  subTitle: string;
-};
+  title: string
+  subTitle: string
+}
 
 export function Intro(props: IntroProps) {
-  const { title, subTitle } = props;
+  const { title, subTitle } = props
 
   return (
     <Fragment>
@@ -17,5 +17,5 @@ export function Intro(props: IntroProps) {
       </div>
       <hr className="mt-4 mb-4 border-2 rounded border-black dark:border-white" />
     </Fragment>
-  );
+  )
 }
