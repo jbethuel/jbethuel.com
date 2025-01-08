@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useRef, ReactNode } from "react"
 
 export function Pre(props: { children?: ReactNode }) {

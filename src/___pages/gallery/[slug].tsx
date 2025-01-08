@@ -1,4 +1,4 @@
-import { Intro } from "@/components/Intro"
+import { Intro } from "@/components/intro"
 import { galleryData } from "@/config/helpers"
 import { seoConfig } from "@/config/seo"
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next"

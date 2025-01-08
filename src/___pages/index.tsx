@@ -1,5 +1,5 @@
-import { CustomLink } from "@/components/CustomLink"
-import { Intro } from "@/components/Intro"
+import { CustomLink } from "@/components/custom-link"
+import { Intro } from "@/components/intro"
 import { getAllMdxFiles, readMdxFile } from "@/config/mdxFileHelper"
 import { Post } from "@/types/post"
 import { InferGetStaticPropsType } from "next"

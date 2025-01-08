@@ -1,4 +1,4 @@
-import { Intro } from "@/components/Intro"
+import { Intro } from "@/components/intro"
 import A from "@/components/mdx/A"
 import { H1, H2, H3, H4 } from "@/components/mdx/Headings"
 import P from "@/components/mdx/P"

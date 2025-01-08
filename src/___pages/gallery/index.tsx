@@ -1,5 +1,5 @@
-import { CustomLink } from "@/components/CustomLink"
-import { Intro } from "@/components/Intro"
+import { CustomLink } from "@/components/custom-link"
+import { Intro } from "@/components/intro"
 import { galleryData } from "@/config/helpers"
 import { seoConfig } from "@/config/seo"
 import { NextSeo } from "next-seo"
