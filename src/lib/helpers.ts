@@ -12,15 +12,13 @@ export function chunkArray<T>(array: T[], chunkSize: number): T[][] {
   return chunkedArray
 }
 
-export const portalId = "portal"
-
 type Image = {
   slug: string
   url: string
   alt: string
 }
 
-const imageUrls: Image[] = [
+export const galleryData: Image[] = [
   {
     slug: "1",
     url: "https://assets.jbethuel.com/IMG_8817.jpeg",
@@ -54,4 +52,3 @@ const imageUrls: Image[] = [
 ]
 
 export const isDevelopment = process.env.NODE_ENV === "development"
-export const galleryData = imageUrls

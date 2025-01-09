@@ -3,7 +3,7 @@ import { H1 } from "./mdx/Headings"
 
 type IntroProps = {
   title: string
-  subTitle: string
+  subTitle?: string
 }
 
 export function Intro(props: IntroProps) {
@@ -13,7 +13,7 @@ export function Intro(props: IntroProps) {
     <Fragment>
       <div className="text-center">
         <H1>{title}</H1>
-        <p className="font-light text-sm">{subTitle}</p>
+        {subTitle ? <p className="font-light text-sm">{subTitle}</p> : null}
       </div>
       <hr className="mt-4 mb-4 border-2 rounded border-black dark:border-white" />
     </Fragment>

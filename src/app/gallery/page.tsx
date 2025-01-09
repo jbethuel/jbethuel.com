@@ -3,7 +3,6 @@ import { Intro } from "@/components/intro"
 import { Image } from "@/types/image"
 import { Fragment } from "react"
 
-
 const imageUrls: Image[] = [
   {
     slug: "1",

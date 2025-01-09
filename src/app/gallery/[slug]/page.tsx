@@ -1,5 +1,5 @@
 import { Intro } from "@/components/intro"
-import { galleryData } from "@/config/helpers"
+import { galleryData } from "@/lib/helpers"
 import { Fragment } from "react"
 
 export function generateStaticParams() {

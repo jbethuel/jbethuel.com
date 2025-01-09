@@ -1,6 +1,6 @@
 import { CustomLink } from "@/components/custom-link"
 import { Intro } from "@/components/intro"
-import { getAllMdxFiles, readMdxFile } from "@/config/mdxFileHelper"
+import { getAllMdxFiles, readMdxFile } from "@/lib/mdxFileHelper"
 import { Post } from "@/types/post"
 import { serialize } from "next-mdx-remote/serialize"
 import { Fragment } from "react"
@@ -29,19 +29,17 @@ export default async function IndexPage() {
 
   return (
     <Fragment>
-      <Intro title="Latest" subTitle="whatever" />
+      <Intro title="Latest" subTitle="Random Thoughts" />
       {posts.map((postPreview, i) => {
         const { slug, title, description, date } = postPreview
         return (
-          <li key={i} className="mb-6">
-            <article>
-              <h2 className="font-semibold underline underline-offset-8">
-                <CustomLink href={`/${slug}`}>{title}</CustomLink>
-              </h2>
-              <p className="font-light text-sm mt-2 mb-2">{date}</p>
-              <p className="font-medium">{description}...</p>
-            </article>
-          </li>
+          <article key={i} className="mb-6">
+            <h2 className="font-semibold underline underline-offset-8">
+              <CustomLink href={`/${slug}`}>{title}</CustomLink>
+            </h2>
+            <p className="font-light text-sm mt-2 mb-2">{date}</p>
+            <p className="font-medium">{description}...</p>
+          </article>
         )
       })}
     </Fragment>
