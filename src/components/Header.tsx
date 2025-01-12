@@ -12,6 +12,9 @@ export function Header() {
         <CustomLink className="font-medium" href="/">
           <HeaderItem label="Home" route="/" />
         </CustomLink>
+        <CustomLink className="font-medium" href="/links">
+          <HeaderItem label="Links" route="/links" />
+        </CustomLink>
         <CustomLink className="font-medium" href="/gallery">
           <HeaderItem label="Gallery" route="/gallery" />
         </CustomLink>
