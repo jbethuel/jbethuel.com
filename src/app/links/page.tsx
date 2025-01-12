@@ -24,7 +24,10 @@ const links = [
 export default function LinksPage() {
   return (
     <Fragment>
-      <Intro title="Links" subTitle="I don't use socmed that much, but feel free to checkout what things I do outside work. 😅" />
+      <Intro
+        title="Links"
+        subTitle="I don't use socmed that much, but feel free to checkout what things I do outside work. 😅"
+      />
       <section>
         {links.map((link, i) => (
           <CustomLink key={i} href={link.url}>
