@@ -9,13 +9,13 @@ export function Header() {
         <CustomLink href="/">JBethuel</CustomLink>
       </h1>
       <nav className="flex flex-row justify-between space-x-4 place-items-center">
-        <CustomLink className="font-medium" href="/">
+        <CustomLink className="font-bold" href="/">
           <HeaderItem label="Home" route="/" />
         </CustomLink>
-        <CustomLink className="font-medium" href="/links">
+        <CustomLink className="font-bold" href="/links">
           <HeaderItem label="Links" route="/links" />
         </CustomLink>
-        <CustomLink className="font-medium" href="/gallery">
+        <CustomLink className="font-bold" href="/gallery">
           <HeaderItem label="Gallery" route="/gallery" />
         </CustomLink>
         <ThemeSwitch />
