@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Lint
-        run: pnpm lint
+      - name: Precheck
+        run: pnpm precheck
 
       - name: Build App
         run: pnpm build
