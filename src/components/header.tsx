@@ -5,7 +5,7 @@ import { ThemeSwitch } from "./theme-switch"
 export function Header() {
   return (
     <header className="flex flex-row justify-between">
-      <h1 className="font-bold">
+      <h1 className="font-bold text-2xl">
         <CustomLink href="/">JBethuel</CustomLink>
       </h1>
       <nav className="flex flex-row justify-between space-x-4 place-items-center">

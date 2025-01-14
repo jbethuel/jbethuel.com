@@ -41,7 +41,7 @@ export default function GalleryPage() {
     <Fragment>
       <Intro title="Gallery" subTitle="random photos" />
       <section>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           {imageUrls.map(({ slug, url, alt }, index) => {
             return (
               <CustomLink key={slug} href={`/gallery/${slug}`}>
