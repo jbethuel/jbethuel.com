@@ -41,21 +41,19 @@ export default function GalleryPage() {
     <Fragment>
       <Intro title="Gallery" subTitle="random photos" />
       <section>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {imageUrls.map(({ slug, url, alt }, index) => {
-            return (
-              <CustomLink key={slug} href={`/gallery/${slug}`}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="hover-images cursor-pointer"
-                  loading="lazy"
-                  key={index}
-                  src={url}
-                  alt={alt}
-                />
-              </CustomLink>
-            )
-          })}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 [&:hover>a]:opacity-50">
+          {imageUrls.map(({ slug, url, alt }, index) => (
+            <CustomLink key={slug} href={`/gallery/${slug}`} className="hover:!opacity-100">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="hover-images cursor-pointer"
+                loading="lazy"
+                key={index}
+                src={url}
+                alt={alt}
+              />
+            </CustomLink>
+          ))}
         </div>
       </section>
     </Fragment>

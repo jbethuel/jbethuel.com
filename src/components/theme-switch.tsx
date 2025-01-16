@@ -1,14 +1,24 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import Image from "next/image"
 
 export function ThemeSwitch() {
   const [mounted, setMounted] = useState(false)
+  const [isChanging, setIsChanging] = useState(false)
   const { setTheme, resolvedTheme: theme } = useTheme()
 
   const isDarkTheme = theme === "dark"
+
+  const onChangeTheme = useCallback(() => {
+    setIsChanging(true)
+
+    setTimeout(() => {
+      setIsChanging(false)
+      setTheme((s) => (s === "dark" ? "light" : "dark"))
+    }, 1000)
+  }, [setTheme])
 
   // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), [])
@@ -20,8 +30,9 @@ export function ThemeSwitch() {
   return (
     <button
       aria-label="Toggle Dark Mode"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={onChangeTheme}
       style={{ height: 25, width: 25 }}
+      className={isChanging ? "animate-spin" : ""}
     >
       <Image
         alt={isDarkTheme ? "moon" : "sun"}
