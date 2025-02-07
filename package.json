@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "precheck": "yarn prettier:check && next lint",
+    "precheck": "pnpm prettier:check && pnpm lint:check",
+    "lint:check": "next lint --max-warnings=0",
     "prettier:check": "prettier --check ./src"
   },
   "dependencies": {
