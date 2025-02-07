@@ -1,8 +1,9 @@
 import { CustomLink } from "@/components/custom-link"
 import { Intro } from "@/components/intro"
 import { Button } from "@/components/ui/button"
-import { galleryData } from "@/lib/helpers"
+import { galleryData } from "@/lib/constants"
 import { ArrowLeft } from "lucide-react"
+import Image from "next/image"
 import { Fragment } from "react"
 
 export function generateStaticParams() {
@@ -27,8 +28,16 @@ export default async function GalleryItem(props: { params: Promise<{ slug: strin
           Go Back
         </Button>
       </CustomLink>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      {image?.url ? <img src={image?.url} alt={image.slug} /> : null}
+      {image?.url ? (
+        <Image
+          key={image.url}
+          src={image.url}
+          width={800}
+          height={600}
+          quality={100}
+          alt={image.alt}
+        />
+      ) : null}
     </Fragment>
   )
 }

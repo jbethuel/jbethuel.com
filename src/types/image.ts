@@ -3,3 +3,5 @@ export type Image = {
   url: string
   alt: string
 }
+
+export type Images = Image[]

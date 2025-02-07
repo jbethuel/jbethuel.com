@@ -1,38 +1,19 @@
 import { CustomLink } from "@/components/custom-link"
 import { Intro } from "@/components/intro"
-import { Image } from "@/types/image"
+import { oslob } from "@/lib/constants"
+import { Images } from "@/types/image"
+import Image from "next/image"
 import { Fragment } from "react"
 
-const imageUrls: Image[] = [
+export type Gallery = {
+  title: string
+  items: Images
+}
+
+const gallery: Gallery[] = [
   {
-    slug: "1",
-    url: "https://assets.jbethuel.com/IMG_8817.jpeg",
-    alt: "wtf",
-  },
-  {
-    slug: "2",
-    url: "https://assets.jbethuel.com/IMG_8824.jpeg",
-    alt: "falls",
-  },
-  {
-    slug: "3",
-    url: "https://assets.jbethuel.com/IMG_8864.jpeg",
-    alt: "oslob",
-  },
-  {
-    slug: "4",
-    url: "https://assets.jbethuel.com/IMG_8948.jpeg",
-    alt: "ruins",
-  },
-  {
-    slug: "5",
-    url: "https://assets.jbethuel.com/IMG_9738.jpeg",
-    alt: "old player",
-  },
-  {
-    slug: "6",
-    url: "https://assets.jbethuel.com/IMG_9439.jpeg",
-    alt: "foggy morning",
+    title: "Cebu - Oslob",
+    items: oslob,
   },
 ]
 
@@ -41,20 +22,19 @@ export default function GalleryPage() {
     <Fragment>
       <Intro title="Gallery" subTitle="random photos" />
       <section>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 [&:hover>a]:opacity-50">
-          {imageUrls.map(({ slug, url, alt }, index) => (
-            <CustomLink key={slug} href={`/gallery/${slug}`} className="hover:!opacity-100">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className="hover-images cursor-pointer"
-                loading="lazy"
-                key={index}
-                src={url}
-                alt={alt}
-              />
-            </CustomLink>
-          ))}
-        </div>
+        {gallery.map(({ title, items }, index) => (
+          <div className="mb-2" key={index}>
+            <h1 className="font-bold text-xl mb-2">{title}</h1>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 [&:hover>a]:opacity-50">
+              {items.map(({ slug, url, alt }) => (
+                <CustomLink key={slug} href={`/gallery/${slug}`} className="hover:!opacity-100">
+                  <Image key={url} src={url} width={800} height={600} quality={40} alt={alt} />
+                </CustomLink>
+              ))}
+            </div>
+            {index < gallery.length - 1 && <hr className="mt-4" />}
+          </div>
+        ))}
       </section>
     </Fragment>
   )
