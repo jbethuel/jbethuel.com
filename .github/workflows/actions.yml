@@ -1,6 +1,9 @@
-name: Check and build
+name: precheck_build_deploy
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   lint_build_deploy:
