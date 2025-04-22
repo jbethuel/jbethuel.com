@@ -1,13 +1,11 @@
-import { CustomLink } from "@/components/custom-link"
+import { BackButton } from "@/components/back-button"
 import { Intro } from "@/components/intro"
 import A from "@/components/mdx/A"
 import { H1, H2, H3, H4 } from "@/components/mdx/Headings"
 import P from "@/components/mdx/P"
 import { Pre } from "@/components/mdx/Pre"
-import { Button } from "@/components/ui/button"
 import { getAllMdxFiles, readMdxFile } from "@/lib/mdxFileHelper"
 import { Post } from "@/types/post"
-import { ArrowLeft } from "lucide-react"
 import { MDXRemote, compileMDX } from "next-mdx-remote/rsc"
 import { Fragment } from "react"
 
@@ -32,12 +30,7 @@ export default async function PostPage(props: { params: Promise<{ post: string }
   return (
     <Fragment>
       <Intro title={title} subTitle={date} />
-      <CustomLink href="/">
-        <Button className="mb-2" variant="outline">
-          <ArrowLeft />
-          Go Back
-        </Button>
-      </CustomLink>
+      <BackButton link="/" />
       {mdxSource ? (
         <MDXRemote
           source={frontmatterRemoved}

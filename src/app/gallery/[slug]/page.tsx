@@ -1,8 +1,8 @@
+import { BackButton } from "@/components/back-button"
 import { Intro } from "@/components/intro"
 import { galleryData } from "@/lib/constants"
 import Image from "next/image"
 import { Fragment } from "react"
-import { BackButton } from "./back-button"
 
 export function generateStaticParams() {
   const paths = galleryData.map((e) => ({ slug: e.slug }))
@@ -18,7 +18,7 @@ export default async function GalleryItem(props: { params: Promise<{ slug: strin
   return (
     <Fragment>
       <Intro title="Gallery" subTitle="random photos" />
-      <BackButton />
+      <BackButton link="/gallery" />
       {image?.url ? (
         <Image
           key={image.url}
