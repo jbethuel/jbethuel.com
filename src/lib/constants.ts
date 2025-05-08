@@ -16,6 +16,10 @@ export const malaybalay: Images = [
     url: "https://assets.jbethuel.com/gallery/465A.jpeg",
     alt: "Road to Kibalabag",
   },
+  {
+    url: "https://assets.jbethuel.com/gallery/9dbe.jpeg",
+    alt: "Home",
+  },
 ]
 
 export const claveria: Images = [
