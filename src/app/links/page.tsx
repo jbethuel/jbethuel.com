@@ -38,7 +38,7 @@ export default function LinksPage() {
             <span key={i} className="mb-4 flex items-center">
               <span>{link.title}</span>
               <span className="mx-1">-</span>
-              <span className="underline underline-offset-4">{link.url}</span>
+              <span className="underline underline-offset-4 decoration-gray-700">{link.url}</span>
             </span>
           </CustomLink>
         ))}

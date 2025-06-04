@@ -15,7 +15,7 @@ export function Intro(props: IntroProps) {
         <H1>{title}</H1>
         {subTitle ? <p className="font-light text-sm">{subTitle}</p> : null}
       </div>
-      <hr className="mt-4 mb-4 border-2 rounded border-black dark:border-white" />
+      <hr className="mt-4 mb-4 border rounded border-gray-700" />
     </Fragment>
   )
 }
