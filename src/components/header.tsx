@@ -6,17 +6,17 @@ export function Header() {
   return (
     <header className="flex flex-row justify-between">
       <h1 className="font-bold text-2xl">
-        <CustomLink href="/">JBethuel</CustomLink>
+        <CustomLink href="/">jbethuel</CustomLink>
       </h1>
       <nav className="flex flex-row justify-between space-x-4 place-items-center">
         <CustomLink className="font-bold" href="/">
-          <HeaderItem label="Home" route="/" />
+          <HeaderItem label="home" route="/" />
         </CustomLink>
-        <CustomLink className="font-bold" href="/links">
-          <HeaderItem label="Links" route="/links" />
+        <CustomLink className="font-bold" href="/blog">
+          <HeaderItem label="blog" route="/blog" />
         </CustomLink>
         <CustomLink className="font-bold" href="/gallery">
-          <HeaderItem label="Gallery" route="/gallery" />
+          <HeaderItem label="gallery" route="/gallery" />
         </CustomLink>
         <ThemeSwitch />
       </nav>

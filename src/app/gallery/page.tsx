@@ -7,7 +7,7 @@ import { Fragment } from "react"
 export default function GalleryPage() {
   return (
     <Fragment>
-      <Intro title="Gallery" subTitle="random photos" />
+      <Intro title="gallery" subTitle="random photos" />
       <section>
         {gallery.map(({ title, items }, galleryIndex) => (
           <div className="mb-2" key={galleryIndex}>

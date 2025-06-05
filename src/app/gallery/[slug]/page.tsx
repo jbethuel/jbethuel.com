@@ -17,7 +17,7 @@ export default async function GalleryItem(props: { params: Promise<{ slug: strin
 
   return (
     <Fragment>
-      <Intro title="Gallery" subTitle="random photos" />
+      <Intro title="gallery" />
       <BackButton link="/gallery" />
       {image?.url ? (
         <Image

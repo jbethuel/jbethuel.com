@@ -1,47 +1,45 @@
 import { CustomLink } from "@/components/custom-link"
 import { Intro } from "@/components/intro"
-import { getAllMdxFiles, readMdxFile } from "@/lib/mdxFileHelper"
-import { Post } from "@/types/post"
-import { serialize } from "next-mdx-remote/serialize"
 import { Fragment } from "react"
 
-async function getPosts() {
-  const postPreviews: Post[] = []
+const links = [
+  {
+    title: "Github",
+    url: "https://github.com/jbethuel",
+  },
+  {
+    title: "Resume",
+    url: "https://docs.google.com/document/d/1c5yM4XufLEsmg98Y-6h-mQx4z3lSBXwlytOvqcm44nw",
+  },
+  {
+    title: "Strava",
+    url: "https://www.strava.com/athletes/143729414",
+  },
+  {
+    title: "Goodreads",
+    url: "https://www.goodreads.com/user/show/174496084-joseph-bethuel",
+  },
+  {
+    title: "Letterboxd",
+    url: "https://boxd.it/9J28N",
+  },
+]
 
-  for (const fileName of getAllMdxFiles({ includeFileExtension: false })) {
-    const file = readMdxFile({ fileName })
-    const serializedPost = await serialize(file, { parseFrontmatter: true })
-
-    postPreviews.push({
-      ...serializedPost.frontmatter,
-      slug: fileName,
-    } as Post)
-  }
-
-  return postPreviews.sort(
-    // sort by oldest to newest
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  )
-}
-
-export default async function IndexPage() {
-  const posts = await getPosts()
-
+export default function LinksPage() {
   return (
     <Fragment>
-      <Intro title="Latest" subTitle="Random Thoughts" />
-      {posts.map((postPreview, i) => {
-        const { slug, title, description, date } = postPreview
-        return (
-          <article key={i} className="mb-6">
-            <h2 className="font-semibold underline underline-offset-8 decoration-gray-700">
-              <CustomLink href={`/${slug}`}>{title}</CustomLink>
-            </h2>
-            <p className="font-light text-sm mt-2 mb-2">{date}</p>
-            <p className="font-medium">{description}...</p>
-          </article>
-        )
-      })}
+      <Intro title="home" subTitle="stuff that i do" />
+      <section>
+        {links.map((link, i) => (
+          <CustomLink key={i} href={link.url}>
+            <span key={i} className="mb-4 flex items-center">
+              <span>{link.title}</span>
+              <span className="mx-1">-</span>
+              <span className="underline underline-offset-4 decoration-gray-700">{link.url}</span>
+            </span>
+          </CustomLink>
+        ))}
+      </section>
     </Fragment>
   )
 }
