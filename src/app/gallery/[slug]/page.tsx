@@ -1,11 +1,16 @@
 import { BackButton } from "@/components/back-button"
 import { Intro } from "@/components/intro"
-import { galleryData } from "@/lib/constants"
-import Image from "next/image"
+import { getAllMdxFiles, readMdxFile } from "@/lib/mdxFileHelper"
+import { Post } from "@/types/post"
+import { compileMDX } from "next-mdx-remote/rsc"
 import { Fragment } from "react"
 
 export function generateStaticParams() {
-  const paths = galleryData.map((e) => ({ slug: e.slug }))
+  const paths = getAllMdxFiles({ folderName: "_gallery", includeFileExtension: false }).map(
+    (file) => ({
+      slug: file,
+    }),
+  )
 
   return paths
 }
@@ -13,22 +18,16 @@ export function generateStaticParams() {
 export default async function GalleryItem(props: { params: Promise<{ slug: string }> }) {
   const { params } = props
   const { slug } = await params
-  const image = galleryData.find((e) => e.slug === slug)
+  const file = readMdxFile({ folderName: "_gallery", fileName: slug })
+  const mdxSource = await compileMDX<Post>({ source: file, options: { parseFrontmatter: true } })
+
+  const { title, date } = mdxSource.frontmatter
 
   return (
     <Fragment>
-      <Intro title="gallery" />
+      <Intro title={title} subTitle={date} />
       <BackButton link="/gallery" />
-      {image?.url ? (
-        <Image
-          key={image.url}
-          src={image.url}
-          width={800}
-          height={600}
-          quality={100}
-          alt={image.alt}
-        />
-      ) : null}
+      {slug}
     </Fragment>
   )
 }

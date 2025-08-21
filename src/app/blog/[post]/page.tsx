@@ -10,9 +10,11 @@ import { MDXRemote, compileMDX } from "next-mdx-remote/rsc"
 import { Fragment } from "react"
 
 export function generateStaticParams() {
-  const paths = getAllMdxFiles({ includeFileExtension: false }).map((file) => ({
-    post: file,
-  }))
+  const paths = getAllMdxFiles({ folderName: "_posts", includeFileExtension: false }).map(
+    (file) => ({
+      post: file,
+    }),
+  )
 
   return paths
 }
@@ -21,7 +23,7 @@ export default async function PostPage(props: { params: Promise<{ post: string }
   const { params } = props
 
   const { post } = await params
-  const file = readMdxFile({ fileName: post })
+  const file = readMdxFile({ folderName: "_posts", fileName: post })
   const mdxSource = await compileMDX<Post>({ source: file, options: { parseFrontmatter: true } })
 
   const { title, date } = mdxSource.frontmatter
