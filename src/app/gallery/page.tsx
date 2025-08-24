@@ -39,8 +39,8 @@ export default async function GalleryPage() {
             <h2 className="font-semibold underline underline-offset-8 decoration-gray-700">
               <CustomLink href={`/gallery/${slug}`}>{title}</CustomLink>
             </h2>
-            <p className="font-light text-sm mt-2 mb-2">{date}</p>
-            <p className="font-medium">{description}...</p>
+            <p className="font-light text-sm mt-2 mb-2">Last updated: {date}</p>
+            {description && <p className="font-medium">{description}...</p>}
           </article>
         )
       })}

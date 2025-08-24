@@ -17,3 +17,7 @@ export function H3(props: HeadingProps) {
 export function H4(props: HeadingProps) {
   return <h4 className="font-bold text-base">{props.children}</h4>
 }
+
+export function Blockquote(props: HeadingProps) {
+  return <blockquote className="mt-6 border-l-2 pl-6 italic">{props.children}</blockquote>
+}
