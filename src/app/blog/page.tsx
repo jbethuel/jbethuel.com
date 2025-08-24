@@ -5,11 +5,13 @@ import { Post } from "@/types/post"
 import { serialize } from "next-mdx-remote/serialize"
 import { Fragment } from "react"
 
+const folderName = "_posts"
+
 async function getPosts() {
   const postPreviews: Post[] = []
 
-  for (const fileName of getAllMdxFiles({ includeFileExtension: false })) {
-    const file = readMdxFile({ fileName })
+  for (const fileName of getAllMdxFiles({ folderName, includeFileExtension: false })) {
+    const file = readMdxFile({ folderName, fileName })
     const serializedPost = await serialize(file, { parseFrontmatter: true })
 
     postPreviews.push({
