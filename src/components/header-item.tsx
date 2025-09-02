@@ -1,11 +1,5 @@
-"use client"
+export function HeaderItem(props: { isActive: boolean; label: string }) {
+  const { label, isActive } = props
 
-import { usePathname } from "next/navigation"
-
-export function HeaderItem(props: { route: string; label: string }) {
-  const { route, label } = props
-
-  const pathname = usePathname()
-
-  return <span className={pathname === route ? "underline underline-offset-8" : ""}>{label}</span>
+  return <span className={isActive ? "underline underline-offset-8" : ""}>{label}</span>
 }
