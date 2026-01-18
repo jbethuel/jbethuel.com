@@ -27,7 +27,10 @@ export default async function PostPage(props: { params: Promise<{ post: string }
   const mdxSource = await compileMDX<Post>({ source: file, options: { parseFrontmatter: true } })
 
   const { title, date } = mdxSource.frontmatter
-  const frontmatterRemoved = file.replace(/---[\s\S]*?---/, "")
+  const frontmatterRemoved = file
+    .replace(/---[\s\S]*?---/, "")
+    .replace(/([^\n])\n([^\n])/g, "$1  \n$2")
+    .replace(/\n{3,}/g, (match) => "\n\n" + "<br/>\n".repeat(match.length - 2))
 
   return (
     <Fragment>

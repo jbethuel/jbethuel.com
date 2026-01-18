@@ -8,7 +8,6 @@ import { ThemeSwitch } from "./theme-switch"
 const NAV_ITEMS = [
   { label: "home", href: "/" },
   { label: "blog", href: "/blog" },
-  { label: "gallery", href: "/gallery" },
 ]
 
 export function Header() {
