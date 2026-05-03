@@ -11,12 +11,14 @@ export function ThemeSwitch() {
   const isDarkTheme = theme === "dark"
 
   const onChangeTheme = useCallback(
-    () => setTheme((s) => (s === "dark" ? "light" : "dark")),
-    [setTheme],
+    () => setTheme(theme === "dark" ? "light" : "dark"),
+    [setTheme, theme],
   )
 
-  // When mounted on client, now we can show the UI
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mounted guard prevents SSR hydration mismatch
+    setMounted(true)
+  }, [])
 
   if (!mounted) {
     return null
