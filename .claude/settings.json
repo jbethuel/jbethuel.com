@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm outdated *)",
+      "Bash(pnpm update *)",
+      "Bash(pnpm add *)",
+      "Bash(pnpm build *)",
+      "Bash(pnpm lint:check)",
+      "Bash(pnpm next *)"
+    ]
+  }
+}
