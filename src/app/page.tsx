@@ -9,7 +9,7 @@ const links = [
   },
   {
     title: "Resume",
-    url: "https://docs.google.com/document/d/1c5yM4XufLEsmg98Y-6h-mQx4z3lSBXwlytOvqcm44nw",
+    url: "https://drive.google.com/file/d/1M6GfiYlY8FgeENOvhf1nAqmEpnoJCsnn/view?usp=sharing",
   },
   {
     title: "Strava",
