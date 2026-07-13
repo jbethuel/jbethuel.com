@@ -8,6 +8,10 @@ const links = [
     url: "https://github.com/jbethuel",
   },
   {
+    title: "LinkedIn",
+    url: "https://linkedin.com/in/bethueldelacruz",
+  },
+  {
     title: "Resume",
     url: "https://drive.google.com/file/d/1M6GfiYlY8FgeENOvhf1nAqmEpnoJCsnn/view?usp=sharing",
   },
@@ -28,7 +32,7 @@ const links = [
 export default function LinksPage() {
   return (
     <Fragment>
-      <Intro title="home" subTitle="stuff that i do" />
+      <Intro title="home" subTitle="full-stack developer, ~9 years and counting" />
       <section>
         {links.map((link, i) => (
           <CustomLink key={i} href={link.url}>

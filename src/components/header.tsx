@@ -7,6 +7,7 @@ import { ThemeSwitch } from "./theme-switch"
 
 const NAV_ITEMS = [
   { label: "home", href: "/" },
+  { label: "work", href: "/work" },
   { label: "blog", href: "/blog" },
 ]
 
