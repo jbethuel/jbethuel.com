@@ -1,7 +1,9 @@
 managePackageManagerVersions: true
 allowBuilds:
+  esbuild: true
   sharp: true
   unrs-resolver: true
+  workerd: true
 overrides:
   postcss@8.4.31: 8.5.17
   brace-expansion@^5.0.5: ^5.0.6
