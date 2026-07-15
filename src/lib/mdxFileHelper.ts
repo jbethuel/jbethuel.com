@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import { isDevelopment } from "./helpers"
 
-type Folder = "_posts" | "_gallery"
+type Folder = "_posts"
 
 export function getAllMdxFiles(args: { folderName: Folder; includeFileExtension: boolean }) {
   const { folderName, includeFileExtension } = args
