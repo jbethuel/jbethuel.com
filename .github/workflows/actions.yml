@@ -29,6 +29,9 @@ jobs:
       - name: Precheck
         run: pnpm precheck
 
+      - name: Test
+        run: pnpm test
+
       - name: Build App
         run: pnpm build
 
