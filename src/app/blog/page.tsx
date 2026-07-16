@@ -1,33 +1,10 @@
 import { CustomLink } from "@/components/custom-link"
 import { Intro } from "@/components/intro"
-import { getAllMdxFiles, readMdxFile } from "@/lib/mdxFileHelper"
-import { Post } from "@/types/post"
-import { serialize } from "next-mdx-remote/serialize"
+import { listPosts } from "@/lib/posts"
 import { Fragment } from "react"
 
-const folderName = "_posts"
-
-async function getPosts() {
-  const postPreviews: Post[] = []
-
-  for (const fileName of getAllMdxFiles({ folderName, includeFileExtension: false })) {
-    const file = readMdxFile({ folderName, fileName })
-    const serializedPost = await serialize(file, { parseFrontmatter: true })
-
-    postPreviews.push({
-      ...serializedPost.frontmatter,
-      slug: fileName,
-    } as Post)
-  }
-
-  return postPreviews.sort(
-    // sort by oldest to newest
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  )
-}
-
-export default async function IndexPage() {
-  const posts = await getPosts()
+export default function IndexPage() {
+  const posts = listPosts()
 
   return (
     <Fragment>
