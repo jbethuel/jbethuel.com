@@ -1,6 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import { BrandMark } from "./brand-mark"
 import { CustomLink } from "./custom-link"
 import { HeaderItem } from "./header-item"
 import { ThemeSwitch } from "./theme-switch"
@@ -22,7 +23,9 @@ export function Header() {
   return (
     <header className="flex flex-row justify-between">
       <h1 className="font-bold text-2xl">
-        <CustomLink href="/">jbethuel</CustomLink>
+        <CustomLink href="/">
+          <BrandMark />
+        </CustomLink>
       </h1>
       <nav className="flex flex-row justify-between space-x-4 place-items-center">
         {NAV_ITEMS.map(({ label, href }) => (

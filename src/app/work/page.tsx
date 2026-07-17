@@ -69,9 +69,14 @@ export default function WorkPage() {
       <section>
         {roles.map((role, i) => (
           <article key={i} className="mb-6">
-            <h2 className="font-semibold underline underline-offset-8 decoration-gray-700">
-              <CustomLink href={role.companyUrl}>{role.company}</CustomLink>
-              <span className="font-light"> - {role.title}</span>
+            <h2 className="font-semibold">
+              <CustomLink
+                href={role.companyUrl}
+                className="underline underline-offset-8 decoration-gray-700 transition-colors hover:text-brand hover:decoration-brand"
+              >
+                {role.company}
+                <span className="font-light"> - {role.title}</span>
+              </CustomLink>
             </h2>
             <p className="font-light text-sm mt-2 mb-2">{role.dates}</p>
             <p className="font-medium">{role.description}</p>
