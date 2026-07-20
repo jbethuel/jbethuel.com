@@ -2,13 +2,11 @@ name: deploy
 
 on:
   push:
-    branches:
-      - main
     tags:
       - '*'
 
 jobs:
-  lint_build_deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo

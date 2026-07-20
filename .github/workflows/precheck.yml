@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  lint_build_deploy:
+  precheck:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
