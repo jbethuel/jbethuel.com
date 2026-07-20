@@ -13,7 +13,7 @@ const links = [
   },
   {
     title: "Resume",
-    url: "https://drive.google.com/file/d/1M6GfiYlY8FgeENOvhf1nAqmEpnoJCsnn/view?usp=sharing",
+    url: "https://drive.google.com/file/d/1M6GfiYlY8FgeENOvhf1nAqmEpnoJCsnn",
   },
   {
     title: "Strava",
@@ -32,7 +32,7 @@ const links = [
 export default function LinksPage() {
   return (
     <Fragment>
-      <Intro title="home" subTitle="full-stack developer, ~9 years and counting" />
+      <Intro title="home" subTitle="I like tech, gaming, fitness, music, movies, books." />
       <section>
         {links.map((link, i) => (
           <CustomLink key={i} href={link.url}>

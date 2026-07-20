@@ -59,7 +59,7 @@ const stack = [
 export default function WorkPage() {
   return (
     <Fragment>
-      <Intro title="work" subTitle="full-stack developer, ~9 years and counting" />
+      <Intro title="work" subTitle="full-stack developer, ~9 years of experience" />
       <CustomLink href="https://drive.google.com/file/d/1M6GfiYlY8FgeENOvhf1nAqmEpnoJCsnn/view?usp=sharing">
         <Button variant="outline" className="mb-6">
           <Download />
