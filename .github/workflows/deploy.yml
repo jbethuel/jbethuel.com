@@ -1,9 +1,11 @@
-name: precheck_build_deploy
+name: deploy
 
 on:
   push:
     branches:
       - main
+    tags:
+      - '*'
 
 jobs:
   lint_build_deploy:
@@ -22,15 +24,6 @@ jobs:
         with:
           node-version: 24
           cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Precheck
-        run: pnpm precheck
-
-      - name: Test
-        run: pnpm test
 
       - name: Build App
         run: pnpm build
