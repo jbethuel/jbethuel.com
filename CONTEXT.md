@@ -6,3 +6,6 @@
 - **Dev-only Post** — `playground.mdx` and any `__`-prefixed file. Visible only when `NODE_ENV` is `development`; never listed or built in production.
 
 The posts module (`listPosts()` / `getPost(slug)`) is the only interface to these rules — pages render, they don't parse.
+
+- **Project** — a side project, hand-curated as an entry in the `projects` array in `src/app/projects/page.tsx`. Every Project has a `repoUrl`; `liveUrl` is optional and present only for the ones that are actually deployed somewhere. A Project with no `liveUrl` renders its source link alone — the absence is not labelled.
+- **Role** — a job, hand-curated the same way in `src/app/work/page.tsx`. Roles and Projects are deliberately plain arrays, not content files: there are few of them and they change rarely.
