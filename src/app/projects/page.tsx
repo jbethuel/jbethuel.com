@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { CustomLink } from "@/components/custom-link"
 import { Intro } from "@/components/intro"
+import { cn } from "@/lib/utils"
 import { Fragment } from "react"
 
 export const metadata: Metadata = {
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description: "Side projects and open source work by Joseph Bethuel Dela Cruz.",
 }
 
-type AiAssist = "none" | "part" | "full"
+type AiAssist = "preAi" | "assisted" | "built"
 
 type Project = {
   name: string
@@ -19,10 +20,11 @@ type Project = {
   aiAssist: AiAssist
 }
 
-const AI_ASSIST_LABEL: Record<AiAssist, string> = {
-  none: "hand-written",
-  part: "AI-assisted",
-  full: "AI-built",
+// Class strings are written out in full - Tailwind only sees literals, not built-up names.
+const AI_ASSIST_TAG: Record<AiAssist, { label: string; className: string }> = {
+  preAi: { label: "pre-AI", className: "text-tag-pre-ai border-tag-pre-ai-border" },
+  assisted: { label: "AI-assisted", className: "text-tag-assisted border-tag-assisted-border" },
+  built: { label: "AI-built", className: "text-tag-built border-tag-built-border" },
 }
 
 const projects: Project[] = [
@@ -33,7 +35,7 @@ const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "PWA", "Vitest", "Playwright"],
     repoUrl: "https://github.com/jbethuel/squares",
     liveUrl: "https://squares.jbethuel.com",
-    aiAssist: "full",
+    aiAssist: "built",
   },
   {
     name: "pnpm-monorepo",
@@ -41,7 +43,7 @@ const projects: Project[] = [
       "A pnpm workspace scaffold I keep reaching for: a Hono API, a Vite + React web app, and shared TypeScript packages consumed directly as source, so there is no build step sitting between a package and the apps that use it.",
     stack: ["pnpm", "TypeScript", "Hono", "Vite", "React"],
     repoUrl: "https://github.com/jbethuel/pnpm-monorepo",
-    aiAssist: "part",
+    aiAssist: "assisted",
   },
   {
     name: "jbethuel.com",
@@ -50,7 +52,7 @@ const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Tailwind", "MDX", "Cloudflare Pages"],
     repoUrl: "https://github.com/jbethuel/jbethuel.com",
     liveUrl: "https://jbethuel.com",
-    aiAssist: "none",
+    aiAssist: "preAi",
   },
 ]
 
@@ -68,8 +70,13 @@ export default function ProjectsPage() {
               >
                 {project.name}
               </CustomLink>
-              <span className="ml-3 align-middle text-xs font-light border border-border rounded px-1.5 py-0.5 text-muted-foreground">
-                {AI_ASSIST_LABEL[project.aiAssist]}
+              <span
+                className={cn(
+                  "ml-3 align-middle text-xs font-light border rounded px-1.5 py-0.5",
+                  AI_ASSIST_TAG[project.aiAssist].className,
+                )}
+              >
+                {AI_ASSIST_TAG[project.aiAssist].label}
               </span>
             </h2>
             <p className="font-light text-sm mt-3 mb-2">{project.stack.join(" · ")}</p>

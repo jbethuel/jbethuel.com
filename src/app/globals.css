@@ -129,6 +129,12 @@
   --color-brand-hover: var(--brand-hover);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-tint: var(--brand-tint);
+  --color-tag-pre-ai: var(--tag-pre-ai);
+  --color-tag-pre-ai-border: var(--tag-pre-ai-border);
+  --color-tag-assisted: var(--tag-assisted);
+  --color-tag-assisted-border: var(--tag-assisted-border);
+  --color-tag-built: var(--tag-built);
+  --color-tag-built-border: var(--tag-built-border);
   --animate-cursor-blink: cursor-blink 1.1s steps(1) infinite;
 }
 
@@ -186,6 +192,12 @@
   --brand-hover: var(--brand-600);
   --brand-foreground: oklch(0.98 0.01 125);
   --brand-tint: var(--brand-50);
+  --tag-pre-ai: oklch(0.5 0.08 128);
+  --tag-pre-ai-border: oklch(0.87 0.04 128);
+  --tag-assisted: oklch(0.52 0.09 75);
+  --tag-assisted-border: oklch(0.88 0.05 75);
+  --tag-built: oklch(0.52 0.11 290);
+  --tag-built-border: oklch(0.88 0.05 290);
 }
 
 .dark {
@@ -230,6 +242,12 @@
   --brand-hover: var(--brand-600);
   --brand-foreground: oklch(0.18 0.02 125);
   --brand-tint: var(--brand-50);
+  --tag-pre-ai: oklch(0.78 0.09 128);
+  --tag-pre-ai-border: oklch(0.78 0.09 128 / 30%);
+  --tag-assisted: oklch(0.8 0.09 78);
+  --tag-assisted-border: oklch(0.8 0.09 78 / 30%);
+  --tag-built: oklch(0.78 0.1 292);
+  --tag-built-border: oklch(0.78 0.1 292 / 30%);
 }
 
 @layer base {
