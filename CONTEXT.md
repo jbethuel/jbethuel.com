@@ -8,4 +8,5 @@
 The posts module (`listPosts()` / `getPost(slug)`) is the only interface to these rules — pages render, they don't parse.
 
 - **Project** — a side project, hand-curated as an entry in the `projects` array in `src/app/projects/page.tsx`. Every Project has a `repoUrl`; `liveUrl` is optional and present only for the ones that are actually deployed somewhere. A Project with no `liveUrl` renders its source link alone — the absence is not labelled.
+- **AI assist** — how much of a Project's code AI wrote: `none`, `part`, or `full`. Required on every Project and always rendered as a tag, so an untagged Project is impossible and a missing tag can never be read as "no AI".
 - **Role** — a job, hand-curated the same way in `src/app/work/page.tsx`. Roles and Projects are deliberately plain arrays, not content files: there are few of them and they change rarely.

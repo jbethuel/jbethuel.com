@@ -8,12 +8,21 @@ export const metadata: Metadata = {
   description: "Side projects and open source work by Joseph Bethuel Dela Cruz.",
 }
 
+type AiAssist = "none" | "part" | "full"
+
 type Project = {
   name: string
   description: string
   stack: string[]
   repoUrl: string
   liveUrl?: string
+  aiAssist: AiAssist
+}
+
+const AI_ASSIST_LABEL: Record<AiAssist, string> = {
+  none: "no AI",
+  part: "part AI",
+  full: "full AI",
 }
 
 const projects: Project[] = [
@@ -24,6 +33,7 @@ const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "PWA", "Vitest", "Playwright"],
     repoUrl: "https://github.com/jbethuel/squares",
     liveUrl: "https://squares.jbethuel.com",
+    aiAssist: "full",
   },
   {
     name: "pnpm-monorepo",
@@ -31,6 +41,7 @@ const projects: Project[] = [
       "A pnpm workspace scaffold I keep reaching for: a Hono API, a Vite + React web app, and shared TypeScript packages consumed directly as source, so there is no build step sitting between a package and the apps that use it.",
     stack: ["pnpm", "TypeScript", "Hono", "Vite", "React"],
     repoUrl: "https://github.com/jbethuel/pnpm-monorepo",
+    aiAssist: "part",
   },
   {
     name: "jbethuel.com",
@@ -39,13 +50,17 @@ const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Tailwind", "MDX", "Cloudflare Pages"],
     repoUrl: "https://github.com/jbethuel/jbethuel.com",
     liveUrl: "https://jbethuel.com",
+    aiAssist: "none",
   },
 ]
 
 export default function ProjectsPage() {
   return (
     <Fragment>
-      <Intro title="projects" subTitle="things I build outside of work" />
+      <Intro
+        title="projects"
+        subTitle="things I build outside of work, tagged by how much of the code AI wrote"
+      />
       <section>
         {projects.map((project, i) => (
           <article key={i} className="mb-6">
@@ -56,6 +71,9 @@ export default function ProjectsPage() {
               >
                 {project.name}
               </CustomLink>
+              <span className="ml-3 align-middle text-xs font-light border border-border rounded px-1.5 py-0.5 text-muted-foreground">
+                {AI_ASSIST_LABEL[project.aiAssist]}
+              </span>
             </h2>
             <p className="font-light text-sm mt-2 mb-2">{project.stack.join(" · ")}</p>
             <p className="font-medium">{project.description}</p>
