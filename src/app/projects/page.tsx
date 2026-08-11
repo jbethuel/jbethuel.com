@@ -20,16 +20,16 @@ type Project = {
 }
 
 const AI_ASSIST_LABEL: Record<AiAssist, string> = {
-  none: "no AI",
-  part: "part AI",
-  full: "full AI",
+  none: "hand-written",
+  part: "AI-assisted",
+  full: "AI-built",
 }
 
 const projects: Project[] = [
   {
     name: "squares",
     description:
-      "A habit tracker that borrows the shape of the GitHub contribution graph - a year of small squares, filled in one tap at a time, so progress is something you can see at a glance. You get today and yesterday to mark a square; older days are locked for good, and archiving a habit you kept missing won't quietly turn a patchy year green. Everything stays on the device: no account, no backend, no analytics.",
+      "A habit tracker that borrows the shape of the GitHub contribution graph - a year of small squares, filled in one tap at a time, so progress is something you can see at a glance. Mark today or yesterday and the record settles behind you, which means the year you are looking at is one you actually earned. Everything stays on the device: no account, no backend, no analytics.",
     stack: ["Next.js", "TypeScript", "PWA", "Vitest", "Playwright"],
     repoUrl: "https://github.com/jbethuel/squares",
     liveUrl: "https://squares.jbethuel.com",
@@ -57,14 +57,11 @@ const projects: Project[] = [
 export default function ProjectsPage() {
   return (
     <Fragment>
-      <Intro
-        title="projects"
-        subTitle="things I build outside of work, tagged by how much of the code AI wrote"
-      />
+      <Intro title="projects" subTitle="things I build outside of work" />
       <section>
         {projects.map((project, i) => (
-          <article key={i} className="mb-6">
-            <h2 className="font-semibold">
+          <article key={i} className="mb-8">
+            <h2 className="font-bold text-xl">
               <CustomLink
                 href={project.repoUrl}
                 className="underline underline-offset-8 decoration-gray-700 transition-colors hover:text-brand hover:decoration-brand"
@@ -75,7 +72,7 @@ export default function ProjectsPage() {
                 {AI_ASSIST_LABEL[project.aiAssist]}
               </span>
             </h2>
-            <p className="font-light text-sm mt-2 mb-2">{project.stack.join(" · ")}</p>
+            <p className="font-light text-sm mt-3 mb-2">{project.stack.join(" · ")}</p>
             <p className="font-medium">{project.description}</p>
             <p className="font-light text-sm mt-2 space-x-2">
               {project.liveUrl ? (
