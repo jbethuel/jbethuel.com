@@ -129,6 +129,12 @@
   --color-brand-hover: var(--brand-hover);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-tint: var(--brand-tint);
+  --color-tag-pre-ai: var(--tag-pre-ai);
+  --color-tag-pre-ai-border: var(--tag-pre-ai-border);
+  --color-tag-assisted: var(--tag-assisted);
+  --color-tag-assisted-border: var(--tag-assisted-border);
+  --color-tag-built: var(--tag-built);
+  --color-tag-built-border: var(--tag-built-border);
   --animate-cursor-blink: cursor-blink 1.1s steps(1) infinite;
 }
 
@@ -140,6 +146,97 @@
   50%,
   100% {
     opacity: 0;
+  }
+}
+
+/* Shifts the gradient layer by exactly one tile, so the loop has no seam.
+   The first position pins the solid fill layer in place. */
+@keyframes tag-shimmer {
+  to {
+    background-position:
+      0 0,
+      200% center;
+  }
+}
+
+/* AI tags carry a drifting rainbow in the border itself: two background layers,
+   a solid fill clipped to the padding box and the gradient clipped to the border
+   box, with a transparent border letting the gradient show through. */
+.tag-ai {
+  border: 1px solid transparent;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-repeat: repeat;
+  background-size:
+    100% 100%,
+    200% 100%;
+  background-position:
+    0 0,
+    0% center;
+  animation: tag-shimmer 6s linear infinite;
+}
+
+.tag-ai-full {
+  /* Declared once so the border and the glow below cannot drift apart. */
+  --tag-rainbow: linear-gradient(
+    90deg,
+    oklch(0.7 0.21 20),
+    oklch(0.78 0.19 75),
+    oklch(0.8 0.18 145),
+    oklch(0.72 0.18 225),
+    oklch(0.68 0.22 305),
+    oklch(0.7 0.21 20)
+  );
+  position: relative;
+  background-image: linear-gradient(var(--background), var(--background)), var(--tag-rainbow);
+  color: var(--foreground);
+}
+
+/* A blurred copy of the same rainbow behind the tag - an actual coloured glow,
+   which a single-hue box-shadow cannot be. Negative z-index keeps it under the
+   tag's own opaque fill, so only the halo escapes. */
+.tag-ai-full::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  border-radius: inherit;
+  background-image: var(--tag-rainbow);
+  background-size: 200% 100%;
+  background-repeat: repeat;
+  filter: blur(9px);
+  opacity: 0.85;
+  animation: tag-glow 6s linear infinite;
+}
+
+@keyframes tag-glow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Half the story, so: roughly 60% of the chroma, a fainter glow, slower drift. */
+.tag-ai-part {
+  background-image:
+    linear-gradient(var(--background), var(--background)),
+    linear-gradient(
+      90deg,
+      oklch(0.72 0.11 20),
+      oklch(0.78 0.1 75),
+      oklch(0.8 0.095 145),
+      oklch(0.74 0.095 225),
+      oklch(0.7 0.12 305),
+      oklch(0.72 0.11 20)
+    );
+  box-shadow: 0 0 8px -4px oklch(0.7 0.12 305 / 30%);
+  animation-duration: 11s;
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag-ai,
+  .tag-ai-full::before {
+    animation: none;
   }
 }
 
@@ -186,6 +283,12 @@
   --brand-hover: var(--brand-600);
   --brand-foreground: oklch(0.98 0.01 125);
   --brand-tint: var(--brand-50);
+  --tag-pre-ai: oklch(0.5 0.08 128);
+  --tag-pre-ai-border: oklch(0.87 0.04 128);
+  --tag-assisted: oklch(0.52 0.09 75);
+  --tag-assisted-border: oklch(0.88 0.05 75);
+  --tag-built: oklch(0.52 0.11 290);
+  --tag-built-border: oklch(0.88 0.05 290);
 }
 
 .dark {
@@ -230,6 +333,12 @@
   --brand-hover: var(--brand-600);
   --brand-foreground: oklch(0.18 0.02 125);
   --brand-tint: var(--brand-50);
+  --tag-pre-ai: oklch(0.78 0.09 128);
+  --tag-pre-ai-border: oklch(0.78 0.09 128 / 30%);
+  --tag-assisted: oklch(0.8 0.09 78);
+  --tag-assisted-border: oklch(0.8 0.09 78 / 30%);
+  --tag-built: oklch(0.78 0.1 292);
+  --tag-built-border: oklch(0.78 0.1 292 / 30%);
 }
 
 @layer base {
