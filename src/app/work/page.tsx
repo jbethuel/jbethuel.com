@@ -25,24 +25,24 @@ const roles: Role[] = [
     companyUrl: "https://rise-x.io",
     title: "Full-Stack Software Developer",
     dates: "Feb 2021 - August 2026",
-    // description:
-    //   "Full-stack on an offline-first Electron app - React front end, C#/.NET back end - that keeps working with no connection and syncs the moment it's back. Re-architected a large React codebase to TypeScript and led a 5-person team spread across Australia, Ukraine, and the Philippines. TDD, Playwright, and Claude Code, MCP for agentic engineering.",
+    description:
+      "Full-stack on an offline-first Electron app - React front end, C#/.NET back end - that keeps working with no connection and syncs the moment it's back. Re-architected a large React codebase to TypeScript and led a 5-person team spread across Australia, Ukraine, and the Philippines. TDD, Playwright, and Claude Code, MCP for agentic engineering.",
   },
   {
     company: "Restoplus",
     companyUrl: "https://restoplus.com",
     title: "Full-Stack Software Developer",
     dates: "Jul 2020 - Feb 2021",
-    // description:
-    //   "Took the table-booking feature from concept to release and kept the React frontend, Node backend, and React Native app running. TDD with Sinon plus end-to-end tests with Cypress and Puppeteer, shipped to the Play Store.",
+    description:
+      "Took the table-booking feature from concept to release and kept the React frontend, Node backend, and React Native app running. TDD with Sinon plus end-to-end tests with Cypress and Puppeteer, shipped to the Play Store.",
   },
   {
     company: "StreetBy",
     companyUrl: "https://streetby.com",
     title: "Full-Stack Software Developer",
     dates: "Apr 2017 - Jul 2020",
-    // description:
-    //   "Owned the merchant management module on a Node backend and integrated Paynamics payments. Built reports for marketing and sales, shipped to both the Play Store and App Store.",
+    description:
+      "Owned the merchant management module on a Node backend and integrated Paynamics payments. Built reports for marketing and sales, shipped to both the Play Store and App Store.",
   },
 ]
 

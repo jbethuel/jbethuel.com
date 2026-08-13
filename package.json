@@ -7,8 +7,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "precheck": "pnpm prettier:check",
+    "precheck": "pnpm prettier:check && pnpm typecheck",
     "test": "vitest run",
+    "typecheck": "tsc --noEmit",
     "lint:check": "eslint ./src --max-warnings=0",
     "prettier:check": "prettier --check ./src",
     "prettier:write": "prettier --write ./src"
