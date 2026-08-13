@@ -16,7 +16,7 @@ type Role = {
   companyUrl: string
   title: string
   dates: string
-  description: string
+  description?: string
 }
 
 const roles: Role[] = [
@@ -79,7 +79,7 @@ export default function WorkPage() {
               </CustomLink>
             </h2>
             <p className="font-light text-sm mt-2 mb-2">{role.dates}</p>
-            <p className="font-medium">{role.description}</p>
+            {role.description && <p className="font-medium">{role.description}</p>}
           </article>
         ))}
       </section>
