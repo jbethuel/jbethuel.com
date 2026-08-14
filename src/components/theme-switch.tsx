@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import Image from "next/image"
+import { cn } from "@/lib/utils"
 
-export function ThemeSwitch() {
+export function ThemeSwitch(props: { className?: string }) {
+  const { className } = props
   const [mounted, setMounted] = useState(false)
   const { setTheme, resolvedTheme: theme } = useTheme()
 
@@ -25,7 +27,11 @@ export function ThemeSwitch() {
   }
 
   return (
-    <button aria-label="Toggle Dark Mode" onClick={onChangeTheme} style={{ height: 25, width: 25 }}>
+    <button
+      aria-label="Toggle Dark Mode"
+      onClick={onChangeTheme}
+      className={cn("h-[25px] w-[25px] shrink-0 cursor-pointer", className)}
+    >
       <Image
         alt={isDarkTheme ? "moon" : "sun"}
         src={
@@ -33,7 +39,7 @@ export function ThemeSwitch() {
             ? "https://assets.jbethuel.com/sun.svg"
             : "https://assets.jbethuel.com/moon.svg"
         }
-        style={{ cursor: "pointer", width: "100%", height: "100%" }}
+        className="h-full w-full"
         height={40}
         width={40}
       />

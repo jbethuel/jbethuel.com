@@ -29,6 +29,11 @@ const links = [
   },
 ]
 
+// The protocol is 8 monospace characters of noise, identical on every row, and it
+// is what pushes the longest URL past the mobile budget. Display only - the real
+// URL still goes in the href.
+const displayUrl = (url: string) => url.replace(/^https?:\/\//, "")
+
 export default function LinksPage() {
   return (
     <Fragment>
@@ -36,10 +41,15 @@ export default function LinksPage() {
       <section>
         {links.map((link, i) => (
           <CustomLink key={i} href={link.url}>
-            <span key={i} className="mb-4 flex items-center">
+            <span key={i} className="mb-4 flex flex-wrap items-baseline">
               <span>{link.title}</span>
               <span className="mx-1">-</span>
-              <span className="underline underline-offset-4 decoration-gray-700">{link.url}</span>
+              {/* `anywhere` rather than `break-word`: only the former lets the URL
+                  break mid-token when computing min-content, which is what stops
+                  it widening the page. */}
+              <span className="underline underline-offset-4 decoration-gray-700 [overflow-wrap:anywhere]">
+                {displayUrl(link.url)}
+              </span>
             </span>
           </CustomLink>
         ))}
