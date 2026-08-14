@@ -1,0 +1,29 @@
+version: 2
+
+# Security alerts on their own only tell us a transitive dependency is vulnerable;
+# they do not tell us when the parent ships the fix. These version updates are how
+# upstream patches actually arrive, so vulnerabilities in dev-only transitives can
+# be left to close themselves rather than pinned open with an override.
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # One PR per ecosystem rather than per package. Everything here is a
+      # devDependency or a framework bump that gets verified by the same
+      # precheck run, so splitting them costs review time and buys nothing.
+      dev-dependencies:
+        dependency-type: development
+      production-dependencies:
+        dependency-type: production
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns:
+          - "*"
