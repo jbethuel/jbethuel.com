@@ -49,11 +49,11 @@ const roles: Role[] = [
 const stack = [
   { label: "Languages", value: "TypeScript, C#" },
   { label: "Frontend", value: "React, React Native, Electron, Next.js" },
-  { label: "Backend", value: "Node, .NET, Firebase, MongoDB" },
+  { label: "Backend", value: "Node, .NET, Firebase, Convex, Supabase, MongoDB" },
   { label: "Cloud", value: "AWS, GCP, Azure" },
   { label: "Testing", value: "Jest, Playwright, Cypress, Puppeteer" },
   { label: "DevOps", value: "Docker, GitHub Actions, monorepos" },
-  { label: "AI Tooling", value: "Claude Code, MCP" },
+  { label: "AI Tooling", value: "Claude Code, MCP, Skills" },
 ]
 
 export default function WorkPage() {
