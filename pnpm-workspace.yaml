@@ -10,6 +10,15 @@ overrides:
   brace-expansion@1: ^1.1.17
   '@babel/core@^7.28.6': ^7.29.7
   sharp@^0.34.5: ^0.35.3
+# How long (minutes) a newly published version must exist before pnpm will
+# install it, transitive dependencies included. Written out rather than left to
+# the default because it is pnpm's v11 default and v10's was 0, and because the
+# Dependabot cooldown in .github/dependabot.yml has to stay >= this value or it
+# opens PRs for versions `pnpm install` then refuses to resolve.
+minimumReleaseAge: 1440
+
+# The age gate has no carve-out for security patches, so the override pins above
+# that had to land the day they shipped are exempted by hand.
 minimumReleaseAgeExclude:
   - brace-expansion@1.1.17
   - postcss@8.5.25

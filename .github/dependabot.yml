@@ -10,6 +10,15 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    # A release has to sit on the registry this long before Dependabot will
+    # propose it, which is the same idea as minimumReleaseAge in
+    # pnpm-workspace.yaml and must stay >= that value: a PR for a version the
+    # age gate still blocks fails at `pnpm install`, not at review. Majors wait
+    # longer because the groups below collapse them into the same PR as the
+    # patches. Security updates ignore cooldown, so fixes are never held back.
+    cooldown:
+      default-days: 3
+      semver-major-days: 7
     groups:
       # One PR per ecosystem rather than per package. Everything here is a
       # devDependency or a framework bump that gets verified by the same
