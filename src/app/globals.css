@@ -349,3 +349,46 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Theme crossfade.
+
+   Deliberately outside @layer, like the tag rules above: unlayered declarations
+   outrank every Tailwind layer, so this wins over the utilities during the swap
+   without needing !important.
+   --------------------------------------------------------------------------- */
+
+/* Scoped to the swap and to nothing else. `.theme-crossing` is only ever on
+   <html> while the palette crosses, which buys two things a permanent global
+   rule could not: the first paint is silent, because a returning visitor's
+   stored theme applies with no class present and so never fades in from the
+   wrong colours; and the `transition-colors` hovers elsewhere keep their own
+   150ms once the swap is done, instead of competing with a site-wide rule.
+
+   opacity and rotate are in the list for the theme switch's two icons, which
+   cross and turn during exactly this window. Being unlayered, this rule replaces
+   whatever transition-property an element declares for itself - so anything left
+   out here does not animate during a swap, however carefully the component asked
+   for it. */
+.theme-crossing *,
+.theme-crossing *::before,
+.theme-crossing *::after {
+  transition-property:
+    background-color, border-color, color, fill, stroke, text-decoration-color, opacity, rotate;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Shorter, but not removed. A colour crossfade is not vestibular motion, and
+     cutting straight from near-black to near-white is the more hostile of the
+     two options for a light-sensitive reader. rotate leaves the list: colour and
+     opacity may cross, movement may not. */
+  .theme-crossing *,
+  .theme-crossing *::before,
+  .theme-crossing *::after {
+    transition-property:
+      background-color, border-color, color, fill, stroke, text-decoration-color, opacity;
+    transition-duration: 120ms;
+  }
+}
