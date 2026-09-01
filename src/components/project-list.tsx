@@ -34,7 +34,7 @@ export function ProjectList() {
               aria-pressed={isActive}
               onClick={() => setFilter(value)}
               className={cn(
-                "font-light transition-colors hover:text-brand",
+                "cursor-pointer font-light transition-colors hover:text-brand",
                 isActive && "text-brand underline underline-offset-8 decoration-brand decoration-2",
               )}
             >
