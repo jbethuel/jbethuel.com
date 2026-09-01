@@ -3,6 +3,7 @@ import localFont from "next/font/local"
 import "./globals.css"
 import { ThemeProvider } from "next-themes"
 import { Header } from "@/components/header"
+import { ThemeCrossfade } from "@/components/theme-crossfade"
 
 const hackFont = localFont({
   src: [
@@ -50,12 +51,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${hackFont.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeCrossfade />
           <div className="max-w-4xl mx-auto pt-10 px-4">
             <Header />
             <main className="mt-2">{children}</main>

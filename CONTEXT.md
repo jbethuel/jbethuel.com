@@ -12,5 +12,8 @@ The posts module (`listPosts()` / `getPost(slug)`) is the only interface to thes
 - **Role** — a job, hand-curated the same way in `src/app/work/page.tsx`. Roles and Projects are deliberately plain arrays, not content files: there are few of them and they change rarely.
 
 - **Mobile budget** — 375px, the narrowest viewport every page must render without scrolling sideways. Content that cannot be made to fit it wraps, or scrolls inside its own bounds; it never widens the page.
-- **Header** — the bar above every page: a **brand mark** (the `jbethuel` wordmark and its blinking cursor), a **nav** of four links, and the **theme switch**. Below the Mobile budget it wraps to two rows rather than putting anything behind a control — see ADR 0001.
+- **Header** — the bar above every page: a **brand mark** (the `jbethuel` wordmark and its blinking cursor), a **nav** of four links, and the **Theme switch**. Below the Mobile budget it wraps to two rows rather than putting anything behind a control — see ADR 0001.
   _Avoid_: navbar, which reads as either the whole Header or the nav alone.
+- **Theme switch** — the control in the Header, and only the control. It is one way to ask for a Theme change, not the change itself.
+- **Theme change** — any change to the resolved theme, whatever caused it: the Theme switch being pressed, the operating system flipping between light and dark, or another tab changing it. The theme a page resolves to on load is not a change — it is where the page started.
+  _Avoid_: "theme switch" for the event; that name belongs to the control.
