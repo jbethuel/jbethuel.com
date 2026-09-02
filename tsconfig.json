@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2023",
     "lib": [
       "dom",
       "dom.iterable",
@@ -26,7 +26,14 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true
   },
   "include": [
     "next-env.d.ts",

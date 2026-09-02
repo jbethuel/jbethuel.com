@@ -6,7 +6,7 @@ import P from "@/components/mdx/P"
 import { Pre } from "@/components/mdx/Pre"
 import { getPost, listPosts } from "@/lib/posts"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import { ComponentPropsWithoutRef, Fragment } from "react"
+import { Fragment, type ComponentPropsWithoutRef } from "react"
 
 export function generateStaticParams() {
   return listPosts().map((post) => ({ post: post.slug }))

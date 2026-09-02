@@ -13,13 +13,13 @@ const POSTS_DIR = "./src/_posts"
 const isDevelopment = () => process.env.NODE_ENV === "development"
 
 function parseFrontmatter(raw: string, slug: string): PostMeta {
-  const match = raw.match(/^---\n([\s\S]*?)\n---/)
-  if (!match) {
+  const [, frontmatter] = raw.match(/^---\n([\s\S]*?)\n---/) ?? []
+  if (frontmatter === undefined) {
     throw new Error(`post "${slug}" has no frontmatter block`)
   }
 
   const fields: Record<string, string> = {}
-  for (const line of match[1].split("\n")) {
+  for (const line of frontmatter.split("\n")) {
     const separator = line.indexOf(":")
     if (separator === -1) continue
     const key = line.slice(0, separator).trim()
@@ -29,12 +29,18 @@ function parseFrontmatter(raw: string, slug: string): PostMeta {
       .replace(/^['"]|['"]$/g, "")
   }
 
-  const { title, description, date } = fields
-  for (const [key, value] of Object.entries({ title, description, date })) {
+  const required = (key: string) => {
+    const value = fields[key]
     if (!value) {
       throw new Error(`post "${slug}" is missing "${key}" in its frontmatter`)
     }
+    return value
   }
+
+  const title = required("title")
+  const description = required("description")
+  const date = required("date")
+
   if (Number.isNaN(Date.parse(date))) {
     throw new Error(`post "${slug}" has an invalid date: "${date}"`)
   }
