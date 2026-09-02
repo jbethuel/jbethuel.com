@@ -26,7 +26,7 @@ export function ThemeSwitch(props: { className?: string }) {
   )
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- mounted guard prevents SSR hydration mismatch
+    // oxlint-disable-next-line react/set-state-in-effect -- mounted guard prevents SSR hydration mismatch
     setMounted(true)
   }, [])
 

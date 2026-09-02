@@ -1,0 +1,50 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "react",
+    "nextjs",
+    "jsx-a11y",
+    "import",
+    "typescript",
+    "unicorn",
+    "oxc",
+    "vitest"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "import/no-unassigned-import": [
+      "error",
+      {
+        "allow": [
+          "**/*.css"
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/components/custom-link.tsx"
+      ],
+      "rules": {
+        "jsx-a11y/anchor-has-content": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    ".next",
+    "out",
+    "node_modules",
+    "next-env.d.ts"
+  ]
+}

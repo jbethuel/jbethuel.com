@@ -44,8 +44,8 @@ export function ProjectList() {
         })}
       </div>
       <section>
-        {visible.map((project, i) => (
-          <article key={i} className="mb-8">
+        {visible.map((project) => (
+          <article key={project.repoUrl} className="mb-8">
             <h2 className="font-bold text-xl">
               <CustomLink
                 href={project.repoUrl}

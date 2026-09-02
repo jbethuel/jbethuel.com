@@ -18,8 +18,9 @@
 - `pnpm install`
 - `pnpm dev` — dev server (Turbopack)
 - `pnpm build` — static export to `out/`
-- `pnpm precheck` — Prettier check (also runs in CI)
-- `pnpm lint:check` — ESLint
+- `pnpm precheck` — Prettier, oxlint, and typecheck (also runs in CI)
+- `pnpm lint:check` — oxlint
+- `pnpm lint:fix` — oxlint with autofix
 
 ## Deploy
 

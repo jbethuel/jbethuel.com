@@ -66,8 +66,8 @@ export default function WorkPage() {
         </Button>
       </CustomLink>
       <section>
-        {roles.map((role, i) => (
-          <article key={i} className="mb-6">
+        {roles.map((role) => (
+          <article key={role.company} className="mb-6">
             <h2 className="font-semibold">
               <CustomLink
                 href={role.companyUrl}
@@ -85,8 +85,8 @@ export default function WorkPage() {
       <section className="mt-10">
         <h2 className="font-semibold underline underline-offset-8 decoration-gray-700">Stack</h2>
         <div className="mt-2 space-y-1">
-          {stack.map((item, i) => (
-            <p key={i} className="font-light text-sm">
+          {stack.map((item) => (
+            <p key={item.label} className="font-light text-sm">
               <span className="font-medium">{item.label}:</span> {item.value}
             </p>
           ))}
