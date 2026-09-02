@@ -39,9 +39,9 @@ export default function LinksPage() {
     <Fragment>
       <Intro title="home" subTitle="I like tech, gaming, fitness, music, movies, books." />
       <section>
-        {links.map((link, i) => (
-          <CustomLink key={i} href={link.url}>
-            <span key={i} className="mb-4 flex flex-wrap items-baseline">
+        {links.map((link) => (
+          <CustomLink key={link.url} href={link.url}>
+            <span className="mb-4 flex flex-wrap items-baseline">
               <span>{link.title}</span>
               <span className="mx-1">-</span>
               {/* `anywhere` rather than `break-word`: only the former lets the URL

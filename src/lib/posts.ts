@@ -64,7 +64,7 @@ export function listPosts(dir: string = POSTS_DIR): PostMeta[] {
       const slug = file.replace(/\.mdx$/, "")
       return parseFrontmatter(fs.readFileSync(path.join(dir, file), "utf8"), slug)
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 export function getPost(slug: string, dir: string = POSTS_DIR) {

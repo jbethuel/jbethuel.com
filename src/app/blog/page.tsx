@@ -9,10 +9,10 @@ export default function IndexPage() {
   return (
     <Fragment>
       <Intro title="blog" subTitle="random things here and there" />
-      {posts.map((postPreview, i) => {
+      {posts.map((postPreview) => {
         const { slug, title, description, date } = postPreview
         return (
-          <article key={i} className="mb-6">
+          <article key={slug} className="mb-6">
             <h2 className="font-semibold">
               <CustomLink
                 href={`/blog/${slug}`}
