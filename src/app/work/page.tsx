@@ -7,8 +7,7 @@ import { Fragment } from "react"
 
 export const metadata: Metadata = {
   title: "JBethuel - Work",
-  description:
-    "Professional experience of Joseph Bethuel Dela Cruz, full-stack software developer.",
+  description: "Professional experience of Joseph Bethuel Dela Cruz, full-stack software engineer.",
 }
 
 type Role = {
@@ -23,7 +22,7 @@ const roles: Role[] = [
   {
     company: "Rise-X",
     companyUrl: "https://rise-x.io",
-    title: "Full-Stack Software Developer",
+    title: "Full Stack Software Engineer",
     dates: "Feb 2021 - August 2026",
     // description:
     //   "Full-stack on an offline-first Electron app - React front end, C#/.NET back end - that keeps working with no connection and syncs the moment it's back. Re-architected a large React codebase to TypeScript and led a 5-person team spread across Australia, Ukraine, and the Philippines. TDD, Playwright, and Claude Code, MCP for agentic engineering.",
@@ -31,7 +30,7 @@ const roles: Role[] = [
   {
     company: "Restoplus",
     companyUrl: "https://restoplus.com",
-    title: "Full-Stack Software Developer",
+    title: "Full Stack Software Engineer",
     dates: "Jul 2020 - Feb 2021",
     // description:
     //   "Took the table-booking feature from concept to release and kept the React frontend, Node backend, and React Native app running. TDD with Sinon plus end-to-end tests with Cypress and Puppeteer, shipped to the Play Store.",
@@ -39,7 +38,7 @@ const roles: Role[] = [
   {
     company: "StreetBy",
     companyUrl: "https://streetby.com",
-    title: "Full-Stack Software Developer",
+    title: "Full Stack Software Engineer",
     dates: "Apr 2017 - Jul 2020",
     // description:
     //   "Owned the merchant management module on a Node backend and integrated Paynamics payments. Built reports for marketing and sales, shipped to both the Play Store and App Store.",
@@ -59,7 +58,7 @@ const stack = [
 export default function WorkPage() {
   return (
     <Fragment>
-      <Intro title="work" subTitle="full-stack developer, ~9 years of experience" />
+      <Intro title="work" subTitle="full-stack engineer, ~9 years of experience" />
       <CustomLink href="https://drive.google.com/file/d/1M6GfiYlY8FgeENOvhf1nAqmEpnoJCsnn/view?usp=sharing">
         <Button variant="outline" className="mb-6">
           <Download />
