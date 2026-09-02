@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, ReactNode } from "react"
+import { useRef, useState, type ReactNode } from "react"
 
 export function Pre(props: { children?: ReactNode }) {
   const { children } = props
