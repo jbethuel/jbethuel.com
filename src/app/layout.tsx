@@ -31,14 +31,14 @@ const hackFont = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "JBethuel - Software Engineer",
-  description: "JBethuel - Software Engineer",
+  title: "JBethuel - Software Developer",
+  description: "JBethuel - Software Developer",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://jbethuel.com/",
-    title: "JBethuel - Software Engineer",
-    description: "JBethuel - Software Engineer",
+    title: "JBethuel - Software Developer",
+    description: "JBethuel - Software Developer",
     siteName: "jbethuel.com",
   },
 }
