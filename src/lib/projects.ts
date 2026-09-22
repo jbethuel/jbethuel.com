@@ -18,6 +18,16 @@ export const AI_ASSIST_TAG: Record<AiAssist, { label: string; className: string 
 
 export const projects: Project[] = [
   {
+    name: "shouldi",
+    description:
+      "A Chrome extension, published as Should I Apply?, that reads the job posting on the current page and scores your resume against it: one encouraging overall match, then a level each for skills, tasks, experience, industry, and education, judged by TypeSafe's Jev model. The resume lives only in Chrome's local storage and is sent only when you press Assess, with your name, emails, phone numbers, and links stripped first. A small Vercel Function holds the API key, enforces per-install and per-IP daily limits in Upstash Redis, and stores none of the text.",
+    stack: ["WXT", "React", "TypeScript", "Vercel Functions", "Upstash Redis", "Vitest"],
+    repoUrl: "https://github.com/jbethuel/shouldi",
+    liveUrl:
+      "https://chromewebstore.google.com/detail/should-i-apply/ghpgfojflbhaakbbkjgmlbnnfhfpboej",
+    aiAssist: "built",
+  },
+  {
     name: "squares",
     description:
       "A habit tracker that borrows the shape of the GitHub contribution graph - a year of small squares, filled in one tap at a time, so progress is something you can see at a glance. Mark today or yesterday and the record settles behind you, which means the year you are looking at is one you actually earned. Everything stays on the device: no account, no backend, no analytics.",
