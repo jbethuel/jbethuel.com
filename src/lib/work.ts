@@ -19,12 +19,25 @@ export const roles: Role[] = [
     title: "Full-Stack Software Developer",
     dates: "Feb 2021 — Aug 2026",
     summary:
-      "Full-stack on an offline-first Electron app — React front end, C#/.NET back end — that keeps working with no connection and syncs the moment it's back.",
+      "Full-stack on an offline-first Electron app — React front end, C#/.NET back end — that keeps working with no connection and syncs to the cloud the moment it's back.",
     highlights: [
-      "Re-architected a large React codebase to TypeScript.",
-      "Led a 5-person team spread across Australia, Ukraine, and the Philippines.",
+      "Led a 5-person team of frontend and backend developers spread across Australia, Ukraine, and the Philippines, running sprint planning, daily scrum, and retrospectives.",
+      "Built and maintained the C#/.NET endpoints and services behind the front end, owning features end to end rather than the UI alone.",
+      "Re-architected a large React codebase from JavaScript to TypeScript: typesafe, reusable functional components, Zustand for client state, and React Query for server state.",
+      "Practiced TDD with 80%+ unit-test coverage, kept a Storybook for designers and product owners, and maintained Playwright suites that catch regressions in critical flows before every release.",
+      "Adopted Claude Code and MCP tooling, building custom Skills for code review, documentation, and internal workflows.",
     ],
-    stack: ["Electron", "React", "TypeScript", "C#/.NET"],
+    stack: [
+      "Electron",
+      "React",
+      "TypeScript",
+      "C#/.NET",
+      "Zustand",
+      "React Query",
+      "Storybook",
+      "Playwright",
+      "Claude Code",
+    ],
   },
   {
     id: "restoplus",
@@ -34,7 +47,11 @@ export const roles: Role[] = [
     dates: "Jul 2020 — Feb 2021",
     summary:
       "Took the table-booking feature from concept to release and kept the React frontend, Node backend, and React Native app running.",
-    stack: ["React", "React Native", "Node"],
+    highlights: [
+      "Practiced TDD with Sinon, backed by end-to-end tests in Cypress and Puppeteer.",
+      "Shipped the app to the Google Play Store.",
+    ],
+    stack: ["React", "React Native", "Node", "Sinon", "Cypress", "Puppeteer"],
   },
   {
     id: "streetby",
@@ -43,8 +60,13 @@ export const roles: Role[] = [
     title: "Full-Stack Software Developer",
     dates: "Apr 2017 — Jul 2020",
     summary:
-      "Owned the merchant management module on a Node backend and integrated Paynamics payments.",
-    stack: ["Node", "Paynamics"],
+      "Built and owned the merchant management module on a Node backend, and shipped the app to both the Google Play Store and the Apple App Store.",
+    highlights: [
+      "Integrated Paynamics for online payments, Globe SMS for messaging, Branch.io for deep linking, and OneSignal for push notifications.",
+      "Built tailored reports that surfaced data insights for the marketing and sales teams.",
+      "Worked with the CEO, product manager, and marketing team to assess technical options and inform decisions.",
+    ],
+    stack: ["Node", "Paynamics", "Globe SMS", "Branch.io", "OneSignal"],
   },
 ]
 
