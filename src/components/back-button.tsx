@@ -1,8 +1,6 @@
 "use client"
 
 import { CustomLink } from "@/components/custom-link"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useCallback } from "react"
 
@@ -30,11 +28,12 @@ export function BackButton(props: BackButtonProps) {
   )
 
   return (
-    <CustomLink href="/" onClick={onClick}>
-      <Button className="mb-2" variant="outline">
-        <ArrowLeft />
-        {label}
-      </Button>
+    <CustomLink
+      href={link}
+      onClick={onClick}
+      className="self-start text-brand-700 hover:text-brand"
+    >
+      ← {label}
     </CustomLink>
   )
 }

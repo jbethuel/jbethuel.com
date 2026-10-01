@@ -2,6 +2,10 @@ export type AiAssist = "preAi" | "assisted" | "built"
 
 export type Project = {
   name: string
+  // Doubles as the section anchor on /projects.
+  id: string
+  // One line for the about page's list; `description` is the full account.
+  blurb: string
   description: string
   stack: string[]
   repoUrl: string
@@ -10,25 +14,36 @@ export type Project = {
 }
 
 // Class strings are written out in full - Tailwind only sees literals, not built-up names.
+// Brand weight climbs with how much of the code AI wrote: muted, tint, solid.
 export const AI_ASSIST_TAG: Record<AiAssist, { label: string; className: string }> = {
-  preAi: { label: "pre-AI", className: "border text-tag-pre-ai border-tag-pre-ai-border" },
-  assisted: { label: "AI-assisted", className: "tag-ai tag-ai-part" },
-  built: { label: "AI-built", className: "tag-ai tag-ai-full" },
+  preAi: { label: "pre-AI", className: "bg-muted text-foreground" },
+  assisted: { label: "AI-assisted", className: "bg-brand-tint text-brand-700" },
+  built: { label: "AI-built", className: "bg-brand text-brand-foreground" },
+}
+
+export type ProjectFilter = AiAssist | "all"
+
+export function filterProjects(list: Project[], filter: ProjectFilter): Project[] {
+  return filter === "all" ? list : list.filter((project) => project.aiAssist === filter)
 }
 
 export const projects: Project[] = [
   {
-    name: "shouldi",
+    name: "shouldiapply",
+    id: "shouldiapply",
+    blurb: "Chrome extension that scores your resume against the job posting you are viewing.",
     description:
       "A Chrome extension, published as Should I Apply?, that reads the job posting on the current page and scores your resume against it: one encouraging overall match, then a level each for skills, tasks, experience, industry, and education, judged by TypeSafe's Jev model. The resume lives only in Chrome's local storage and is sent only when you press Assess, with your name, emails, phone numbers, and links stripped first. A small Vercel Function holds the API key, enforces per-install and per-IP daily limits in Upstash Redis, and stores none of the text.",
     stack: ["WXT", "React", "TypeScript", "Vercel Functions", "Upstash Redis", "Vitest"],
-    repoUrl: "https://github.com/jbethuel/shouldi",
+    repoUrl: "https://github.com/jbethuel/shouldiapply",
     liveUrl:
       "https://chromewebstore.google.com/detail/should-i-apply/ghpgfojflbhaakbbkjgmlbnnfhfpboej",
     aiAssist: "built",
   },
   {
     name: "squares",
+    id: "squares",
+    blurb: "Habit tracker shaped like the GitHub contribution graph. Local-only, no account.",
     description:
       "A habit tracker that borrows the shape of the GitHub contribution graph - a year of small squares, filled in one tap at a time, so progress is something you can see at a glance. Mark today or yesterday and the record settles behind you, which means the year you are looking at is one you actually earned. Everything stays on the device: no account, no backend, no analytics.",
     stack: ["Next.js", "TypeScript", "PWA", "Vitest", "Playwright"],
@@ -38,6 +53,8 @@ export const projects: Project[] = [
   },
   {
     name: "pnpm-monorepo",
+    id: "pnpm-monorepo",
+    blurb: "Workspace scaffold: Hono API, Vite + React app, shared TypeScript packages.",
     description:
       "A pnpm workspace scaffold I keep reaching for: a Hono API, a Vite + React web app, and shared TypeScript packages consumed directly as source, so there is no build step sitting between a package and the apps that use it.",
     stack: ["pnpm", "TypeScript", "Hono", "Vite", "React"],
@@ -46,6 +63,8 @@ export const projects: Project[] = [
   },
   {
     name: "jbethuel.com",
+    id: "jbethuel-com",
+    blurb: "This site. Static Next.js and MDX on Cloudflare Pages.",
     description:
       "This site. Next.js App Router compiled to a static export, blog posts authored in MDX, Tailwind and shadcn/ui for the front end, shipped to Cloudflare Pages by GitHub Actions on every push to main.",
     stack: ["Next.js", "TypeScript", "Tailwind", "MDX", "Cloudflare Pages"],
@@ -55,6 +74,8 @@ export const projects: Project[] = [
   },
   {
     name: "url-shortener",
+    id: "url-shortener",
+    blurb: "Link shortener with a dashboard. .NET API, MongoDB, React front end.",
     description:
       "A link shortener with a dashboard behind a login. A .NET API over MongoDB handles the links, with scope-based JWT authorization and xUnit tests, and a React + Vite front end talks to it through React Query. Containerised and shipped to Azure by GitHub Actions.",
     stack: ["React", "TypeScript", "Vite", ".NET", "MongoDB", "Docker", "Azure"],

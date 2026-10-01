@@ -1,55 +1,74 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Both icons sit stacked and turn over together, on the same 200ms as the
-// palette. The transition names `rotate`, not `transform`: Tailwind's rotate-*
-// sets the individual rotate property, so a transition on transform would leave
-// the turn to snap while only the fade animated. Movement goes under reduced
-// motion; the swap itself stays.
-const ICON =
-  "absolute inset-0 h-full w-full transition-[opacity,rotate] duration-200 ease-out motion-reduce:rotate-0 motion-reduce:transition-none"
-
-export function ThemeSwitch(props: { className?: string }) {
-  const { className } = props
+// The resolved theme is only known on the client, so until mount neither
+// segment is pressed - rendering a guess would mismatch on hydration.
+function useResolvedTheme() {
   const [mounted, setMounted] = useState(false)
-  const { setTheme, resolvedTheme: theme } = useTheme()
-
-  const isDarkTheme = theme === "dark"
-
-  const onChangeTheme = useCallback(
-    () => setTheme(theme === "dark" ? "light" : "dark"),
-    [setTheme, theme],
-  )
+  const { setTheme, resolvedTheme } = useTheme()
 
   useEffect(() => {
     // oxlint-disable-next-line react/set-state-in-effect -- mounted guard prevents SSR hydration mismatch
     setMounted(true)
   }, [])
 
-  if (!mounted) {
-    return null
-  }
+  const isDark = mounted ? resolvedTheme === "dark" : undefined
+  return { isDark, setTheme }
+}
+
+const segment = (pressed: boolean) =>
+  cn(
+    "cursor-pointer px-2.5 py-[3px] transition-colors",
+    pressed ? "bg-brand text-brand-foreground" : "text-muted-foreground hover:text-foreground",
+  )
+
+/** The Theme switch: a two-segment light / dark control in the title bar. */
+export function ThemeSwitch() {
+  const { isDark, setTheme } = useResolvedTheme()
+
+  // Below 600px the words drop and only the glyphs remain; aria-label keeps the name.
+  return (
+    <fieldset className="flex overflow-hidden rounded-md border text-xs">
+      <legend className="sr-only">Theme</legend>
+      <button
+        type="button"
+        aria-label="Light theme"
+        aria-pressed={isDark === false}
+        onClick={() => setTheme("light")}
+        className={segment(isDark === false)}
+      >
+        ☀<span className="hidden min-[600px]:inline"> light</span>
+      </button>
+      <button
+        type="button"
+        aria-label="Dark theme"
+        aria-pressed={isDark === true}
+        onClick={() => setTheme("dark")}
+        className={cn(segment(isDark === true), "border-l")}
+      >
+        ☾<span className="hidden min-[600px]:inline"> dark</span>
+      </button>
+    </fieldset>
+  )
+}
+
+/** The status bar's theme readout, which flips the theme when pressed. */
+export function ThemeToggle() {
+  const { isDark, setTheme } = useResolvedTheme()
+
+  if (isDark === undefined) return null
 
   return (
     <button
-      aria-label="Toggle Dark Mode"
-      onClick={onChangeTheme}
-      className={cn("relative h-[25px] w-[25px] shrink-0 cursor-pointer", className)}
+      type="button"
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="cursor-pointer"
     >
-      {/* The icon shows the theme you would be switching *to*, so the sun means
-          "go light" and is the one on show while dark. */}
-      <Sun
-        aria-hidden
-        className={cn(ICON, isDarkTheme ? "rotate-0 opacity-100" : "-rotate-90 opacity-0")}
-      />
-      <Moon
-        aria-hidden
-        className={cn(ICON, isDarkTheme ? "rotate-90 opacity-0" : "rotate-0 opacity-100")}
-      />
+      {isDark ? "☾ dark" : "☀ light"}
     </button>
   )
 }

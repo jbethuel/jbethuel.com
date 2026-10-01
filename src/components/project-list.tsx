@@ -1,91 +1,83 @@
 "use client"
 
-import { AI_ASSIST_TAG, projects, type AiAssist } from "@/lib/projects"
+import { AI_ASSIST_TAG, filterProjects, projects, type ProjectFilter } from "@/lib/projects"
 import { cn } from "@/lib/utils"
 import { Fragment, useState } from "react"
+import { AiAssistTag } from "./ai-assist-tag"
 import { CustomLink } from "./custom-link"
+import { PageHeading, Section, SectionHeading } from "./markdown"
 
-type Filter = AiAssist | "all"
-
-const FILTERS: { value: Filter; label: string }[] = [
+const FILTERS: { value: ProjectFilter; label: string }[] = [
   { value: "all", label: "all" },
   { value: "preAi", label: AI_ASSIST_TAG.preAi.label },
   { value: "assisted", label: AI_ASSIST_TAG.assisted.label },
   { value: "built", label: AI_ASSIST_TAG.built.label },
 ]
 
-const countFor = (value: Filter) =>
-  value === "all" ? projects.length : projects.filter((p) => p.aiAssist === value).length
+const countFor = (value: ProjectFilter) => filterProjects(projects, value).length
+
+const LINK = "text-brand-700 underline underline-offset-4"
 
 export function ProjectList() {
-  const [filter, setFilter] = useState<Filter>("all")
+  const [filter, setFilter] = useState<ProjectFilter>("all")
 
-  const visible = filter === "all" ? projects : projects.filter((p) => p.aiAssist === filter)
+  const visible = filterProjects(projects, filter)
 
   return (
     <Fragment>
-      <div className="flex flex-wrap gap-x-5 gap-y-2 mb-8 text-sm">
-        {FILTERS.map(({ value, label }) => {
-          const isActive = filter === value
-          return (
-            <button
-              key={value}
-              type="button"
-              aria-pressed={isActive}
-              onClick={() => setFilter(value)}
-              className={cn(
-                "cursor-pointer font-light transition-colors hover:text-brand",
-                isActive && "text-brand underline underline-offset-8 decoration-brand decoration-2",
-              )}
-            >
-              {label} <span className="text-xs">({countFor(value)})</span>
-            </button>
-          )
-        })}
-      </div>
-      <section>
-        {visible.map((project) => (
-          <article key={project.repoUrl} className="mb-8">
-            <h2 className="font-bold text-xl">
-              <CustomLink
-                href={project.repoUrl}
-                className="underline underline-offset-8 decoration-gray-700 transition-colors hover:text-brand hover:decoration-brand"
-              >
-                {project.name}
-              </CustomLink>
-              <span
+      <div className="flex flex-col gap-3">
+        <PageHeading title="projects" subTitle="things I build outside of work" />
+        <div className="mt-1 flex flex-wrap gap-2">
+          {FILTERS.map(({ value, label }) => {
+            const isActive = filter === value
+            return (
+              <button
+                key={value}
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => setFilter(value)}
                 className={cn(
-                  "ml-3 align-middle text-xs font-light rounded px-1.5 py-0.5",
-                  AI_ASSIST_TAG[project.aiAssist].className,
+                  "cursor-pointer rounded-md border px-3 py-1 leading-normal transition-colors",
+                  isActive
+                    ? "border-foreground bg-foreground text-background"
+                    : "hover:border-foreground",
                 )}
               >
-                {AI_ASSIST_TAG[project.aiAssist].label}
-              </span>
-            </h2>
-            <p className="font-light text-sm mt-3 mb-2">{project.stack.join(" · ")}</p>
-            <p className="font-medium">{project.description}</p>
-            <p className="font-light text-sm mt-2 space-x-2">
-              {project.liveUrl ? (
-                <Fragment>
-                  <CustomLink
-                    href={project.liveUrl}
-                    className="underline underline-offset-4 decoration-gray-700 transition-colors hover:text-brand hover:decoration-brand"
-                  >
-                    live
-                  </CustomLink>
-                  <span>·</span>
-                </Fragment>
-              ) : null}
-              <CustomLink
-                href={project.repoUrl}
-                className="underline underline-offset-4 decoration-gray-700 transition-colors hover:text-brand hover:decoration-brand"
-              >
-                source
+                {label} ({countFor(value)})
+              </button>
+            )
+          })}
+        </div>
+      </div>
+      {/* The last project is stretched to fill the screen below its scroll margin
+          (112px), the status bar (26px), and main's bottom padding (56px), so a
+          `/projects#id` link lands with it at the top like every other project
+          rather than wherever the page happens to run out. */}
+      {visible.map((project) => (
+        <Section
+          key={project.id}
+          id={project.id}
+          className="gap-2.5 last:min-h-[calc(100dvh-194px)]"
+        >
+          <SectionHeading aside={<AiAssistTag value={project.aiAssist} />}>
+            <CustomLink href={project.repoUrl} className="underline-offset-4 hover:underline">
+              {project.name}
+            </CustomLink>
+          </SectionHeading>
+          <p className="text-muted-foreground">{project.stack.join(" · ")}</p>
+          <p className="max-w-[680px] text-pretty">{project.description}</p>
+          <div className="flex gap-4">
+            {project.liveUrl ? (
+              <CustomLink href={project.liveUrl} className={LINK}>
+                live ↗
               </CustomLink>
-            </p>
-          </article>
-        ))}
-      </section>
+            ) : null}
+            <CustomLink href={project.repoUrl} className={LINK}>
+              source ↗
+            </CustomLink>
+          </div>
+        </Section>
+      ))}
     </Fragment>
   )
 }

@@ -45,6 +45,9 @@
     ".next",
     "out",
     "node_modules",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    ".wrangler",
+    "test-results",
+    "playwright-report"
   ]
 }
