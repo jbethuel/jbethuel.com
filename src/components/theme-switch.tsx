@@ -19,17 +19,15 @@ function useResolvedTheme() {
   return { isDark, setTheme }
 }
 
-const SEGMENT = "cursor-pointer px-2.5 py-[3px] transition-colors"
+const segment = (pressed: boolean) =>
+  cn(
+    "cursor-pointer px-2.5 py-[3px] transition-colors",
+    pressed ? "bg-brand text-brand-foreground" : "text-muted-foreground hover:text-foreground",
+  )
 
 /** The Theme switch: a two-segment light / dark control in the title bar. */
 export function ThemeSwitch() {
   const { isDark, setTheme } = useResolvedTheme()
-
-  const segment = (pressed: boolean) =>
-    cn(
-      SEGMENT,
-      pressed ? "bg-brand text-brand-foreground" : "text-muted-foreground hover:text-foreground",
-    )
 
   // Below 600px the words drop and only the glyphs remain; aria-label keeps the name.
   return (
