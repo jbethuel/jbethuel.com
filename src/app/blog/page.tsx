@@ -1,31 +1,37 @@
+import type { Metadata } from "next"
 import { CustomLink } from "@/components/custom-link"
-import { Intro } from "@/components/intro"
+import { PageHeading } from "@/components/markdown"
 import { listPosts } from "@/lib/posts"
 import { Fragment } from "react"
 
-export default function IndexPage() {
+export const metadata: Metadata = {
+  title: "JBethuel - Writing",
+  description: "Notes by Joseph Bethuel Dela Cruz, mostly about the gear he uses.",
+}
+
+export default function BlogPage() {
   const posts = listPosts()
 
   return (
     <Fragment>
-      <Intro title="blog" subTitle="random things here and there" />
-      {posts.map((postPreview) => {
-        const { slug, title, description, date } = postPreview
-        return (
-          <article key={slug} className="mb-6">
-            <h2 className="font-semibold">
-              <CustomLink
-                href={`/blog/${slug}`}
-                className="underline underline-offset-8 decoration-gray-700 transition-colors hover:text-brand hover:decoration-brand"
-              >
-                {title}
-              </CustomLink>
-            </h2>
-            <p className="font-light text-sm mt-2 mb-2">{date}</p>
-            <p className="font-medium">{description}...</p>
-          </article>
-        )
-      })}
+      <PageHeading title="writing" subTitle="Notes, mostly about the gear I use." />
+      {/* A folder listing: one row per Post, named as the file it is. */}
+      <div className="overflow-hidden rounded-lg border">
+        {posts.map(({ slug, description, date }) => (
+          <CustomLink
+            key={slug}
+            href={`/blog/${slug}`}
+            className="group grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-1 border-b px-[18px] py-3.5 transition-colors last:border-b-0 hover:bg-brand-tint"
+          >
+            <span className="font-bold [overflow-wrap:anywhere] group-hover:text-brand">
+              <span className="text-brand">▸ </span>
+              {slug}.md
+            </span>
+            <span className="text-muted-foreground">{date}</span>
+            <span className="col-span-full text-muted-foreground">{description}</span>
+          </CustomLink>
+        ))}
+      </div>
     </Fragment>
   )
 }

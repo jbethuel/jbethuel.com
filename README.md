@@ -19,6 +19,8 @@
 - `pnpm dev` — dev server (Turbopack)
 - `pnpm build` — static export to `out/`
 - `pnpm precheck` — Prettier, oxlint, and typecheck (also runs in CI)
+- `pnpm test` — unit tests (Vitest, `*.test.ts`)
+- `pnpm test:e2e` — end-to-end tests (Playwright, `e2e/*.e2e.ts`) at desktop and 375px widths, against the static export served by `wrangler pages dev`; run `pnpm exec playwright install chromium` once first
 - `pnpm lint:check` — oxlint
 - `pnpm lint:fix` — oxlint with autofix
 

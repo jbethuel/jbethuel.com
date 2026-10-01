@@ -9,6 +9,7 @@
     "start": "next start",
     "precheck": "pnpm prettier:check && pnpm lint:check && pnpm typecheck",
     "test": "vitest run",
+    "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "lint:check": "oxlint --max-warnings=0",
     "prettier:check": "prettier --check ./src",
@@ -30,6 +31,7 @@
     "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.6.3",
     "@types/react": "19.3.0",

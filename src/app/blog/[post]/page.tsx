@@ -1,10 +1,11 @@
 import { BackButton } from "@/components/back-button"
-import { Intro } from "@/components/intro"
+import { PageHeading } from "@/components/markdown"
 import A from "@/components/mdx/A"
 import { H1, H2, H3, H4 } from "@/components/mdx/Headings"
 import P from "@/components/mdx/P"
 import { Pre } from "@/components/mdx/Pre"
 import { getPost, listPosts } from "@/lib/posts"
+import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { Fragment, type ComponentPropsWithoutRef } from "react"
 
@@ -39,6 +40,13 @@ const mdxComponents = {
   img: MdxImage,
 }
 
+export async function generateMetadata(props: {
+  params: Promise<{ post: string }>
+}): Promise<Metadata> {
+  const { meta } = getPost((await props.params).post)
+  return { title: `JBethuel - ${meta.title}`, description: meta.description }
+}
+
 export default async function PostPage(props: { params: Promise<{ post: string }> }) {
   const { params } = props
 
@@ -47,9 +55,13 @@ export default async function PostPage(props: { params: Promise<{ post: string }
 
   return (
     <Fragment>
-      <Intro title={meta.title} subTitle={meta.date} />
-      <BackButton link="/" />
-      <MDXRemote source={body} components={mdxComponents} />
+      <div className="flex flex-col gap-4">
+        <BackButton link="/blog" label="writing" />
+        <PageHeading title={meta.title} subTitle={meta.date} />
+      </div>
+      <article className="flex flex-col gap-4">
+        <MDXRemote source={body} components={mdxComponents} />
+      </article>
     </Fragment>
   )
 }

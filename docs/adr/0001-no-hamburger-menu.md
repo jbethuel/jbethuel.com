@@ -1,5 +1,10 @@
 # The Header wraps on mobile instead of collapsing into a hamburger menu
 
+> **Superseded (2026-10):** the editor redesign replaced the wrapping nav with a
+> row of file tabs that scrolls sideways inside its own bounds. The reasoning
+> below still holds — nothing is hidden behind a control — only the mechanism
+> changed.
+
 The Header needed 412px against a 343px budget at the 375px Mobile budget, so it
 had to change. We wrap it to two rows — brand mark and theme switch on the first,
 nav spread edge to edge on the second — rather than collapse the nav behind a

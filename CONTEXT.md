@@ -9,11 +9,12 @@ The posts module (`listPosts()` / `getPost(slug)`) is the only interface to thes
 
 - **Project** — a side project, hand-curated as an entry in the `projects` array in `src/lib/projects.ts`. Every Project has a `repoUrl`; `liveUrl` is optional and present only for the ones that are actually deployed somewhere. A Project with no `liveUrl` renders its source link alone — the absence is not labelled. The data lives in `src/lib` rather than the page because the page is a server component (it owns the route's `metadata`) while the list that filters them is a client component.
 - **AI assist** — how much of a Project's code AI wrote: `preAi` (built before AI was in the workflow at all), `assisted`, or `built`. Required on every Project and always rendered as a coloured tag, so an untagged Project is impossible and a missing tag can never be read as a claim. `preAi` deliberately dates the work rather than describing its authorship — later commits to an old project may well be AI-assisted.
-- **Role** — a job, hand-curated the same way in `src/app/work/page.tsx`. Roles and Projects are deliberately plain arrays, not content files: there are few of them and they change rarely.
+- **Role** — a job, hand-curated the same way in `src/lib/work.ts`, which both the about page's work table and `/work` read. Roles and Projects are deliberately plain arrays, not content files: there are few of them and they change rarely.
 
 - **Mobile budget** — 375px, the narrowest viewport every page must render without scrolling sideways. Content that cannot be made to fit it wraps, or scrolls inside its own bounds; it never widens the page.
-- **Header** — the bar above every page: a **brand mark** (the `jbethuel` wordmark and its blinking cursor), a **nav** of four links, and the **Theme switch**. Below the Mobile budget it wraps to two rows rather than putting anything behind a control — see ADR 0001.
-  _Avoid_: navbar, which reads as either the whole Header or the nav alone.
-- **Theme switch** — the control in the Header, and only the control. It is one way to ask for a Theme change, not the change itself.
+- **Header** — the chrome above every page, styled as a code editor: a **title bar** (the open document's name, then the **Theme switch**) over a row of **file tabs**, one per page. Below 600px the title drops its `— jbethuel.com` suffix and the switch drops its words. The tab row never wraps; it scrolls sideways inside its own bounds, which keeps every page on screen within the Mobile budget — see ADR 0001.
+  _Avoid_: navbar, which reads as either the whole Header or the tab row alone.
+- **Status bar** — the brand-coloured strip along the bottom edge, mirroring an editor's. Decorative apart from its theme readout, which is a second way to ask for a Theme change.
+- **Theme switch** — the two-segment light / dark control in the title bar, and only that control. It is one way to ask for a Theme change, not the change itself.
 - **Theme change** — any change to the resolved theme, whatever caused it: the Theme switch being pressed, the operating system flipping between light and dark, or another tab changing it. The theme a page resolves to on load is not a change — it is where the page started.
   _Avoid_: "theme switch" for the event; that name belongs to the control.
