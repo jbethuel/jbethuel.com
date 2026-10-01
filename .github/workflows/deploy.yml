@@ -26,9 +26,30 @@ jobs:
       - name: Build App
         run: pnpm build
 
+      # Stamps the build so the verify step can tell which release is live.
+      - name: Write version file
+        run: echo '{"version":"${{ github.ref_name }}","commit":"${{ github.sha }}"}' > out/version.json
+
       - name: Deploy App
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy out --project-name jbethuel --branch=main
+
+      - name: Verify latest version is live
+        env:
+          SITE_URL: https://jbethuel.com
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: |
+          for attempt in $(seq 1 30); do
+            live=$(curl -fsS -H 'Cache-Control: no-cache' "$SITE_URL/version.json?t=$(date +%s)" || true)
+            echo "Attempt $attempt: $live"
+            if echo "$live" | grep -q "\"commit\":\"$EXPECTED_COMMIT\""; then
+              echo "${{ github.ref_name }} ($EXPECTED_COMMIT) is live on $SITE_URL"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::$SITE_URL is not serving ${{ github.ref_name }} ($EXPECTED_COMMIT) after 5 minutes"
+          exit 1
