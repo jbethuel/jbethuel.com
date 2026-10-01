@@ -26,6 +26,6 @@
 
 ## Deploy
 
-Pushes to `main` build and deploy via GitHub Actions (`.github/workflows/actions.yml`) to Cloudflare Pages using Wrangler.
+Pushing a tag builds and deploys via GitHub Actions (`.github/workflows/deploy.yml`) to Cloudflare Pages using Wrangler. The workflow writes `out/version.json` (`{ version, commit }`) into the build, then polls `https://jbethuel.com/version.json` until it reports the tagged commit, failing the run if it isn't live within 5 minutes.
 
 Wrangler is a pinned devDependency rather than installed ad-hoc by `wrangler-action`, since pnpm blocks postinstall scripts by default. Its native build steps (`esbuild`, `workerd`) are allow-listed in `pnpm-workspace.yaml` under `allowBuilds`. If a `pnpm install` ever reports ignored build scripts for a new dependency, add it there rather than running `pnpm approve-builds` locally (CI is non-interactive).
