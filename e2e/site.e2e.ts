@@ -110,3 +110,20 @@ test.describe("layout", () => {
     })
   }
 })
+
+test.describe("icons", () => {
+  test("every page links the favicons, touch icon, and manifest, and they all load", async ({
+    page,
+    request,
+  }) => {
+    await page.goto("/")
+    const hrefs = await page
+      .locator('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]')
+      .evaluateAll((links) => links.map((link) => (link as HTMLLinkElement).href))
+    expect(hrefs).toHaveLength(4)
+
+    const urls = [...hrefs, "/icon-512.png"]
+    const responses = await Promise.all(urls.map((url) => request.get(url)))
+    expect(responses.map((response) => response.ok())).toEqual(urls.map(() => true))
+  })
+})
