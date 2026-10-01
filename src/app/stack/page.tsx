@@ -9,10 +9,36 @@ export const metadata: Metadata = {
 
 const stack: { group: string; items: string[] }[] = [
   { group: "languages", items: ["TypeScript", "C#"] },
-  { group: "frontend", items: ["React", "React Native", "Electron", "Next.js"] },
-  { group: "backend", items: ["Node", ".NET", "Firebase", "MongoDB"] },
-  { group: "testing", items: ["TDD", "Playwright"] },
-  { group: "ai tooling", items: ["Claude Code", "MCP"] },
+  {
+    group: "frontend",
+    items: [
+      "React",
+      "React Native",
+      "Next.js",
+      "Electron",
+      "TanStack Query",
+      "TanStack Router",
+      "Zustand",
+      "Vite",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Storybook",
+    ],
+  },
+  {
+    group: "backend",
+    items: ["Node.js", ".NET", "GraphQL", "Firebase", "Supabase", "Convex", "MongoDB"],
+  },
+  { group: "cloud", items: ["AWS", "GCP", "Azure", "Vercel", "Cloudflare", "Docker"] },
+  {
+    group: "tooling",
+    items: ["pnpm", "npm", "yarn", "Turborepo", "GitHub Actions", "Azure DevOps"],
+  },
+  {
+    group: "testing",
+    items: ["TDD", "Playwright", "Vitest", "Jest", "Cypress", "Sinon", "Puppeteer"],
+  },
+  { group: "ai tooling", items: ["Claude Code", "MCP", "Claude Skills", "Anthropic SDK"] },
 ]
 
 export default function StackPage() {
