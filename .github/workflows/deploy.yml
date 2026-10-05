@@ -42,7 +42,7 @@ jobs:
 
       - name: Verify latest version is live
         env:
-          SITE_URL: https://website.jbethuel.workers.dev
+          SITE_URL: https://jbethuel.com
           EXPECTED_COMMIT: ${{ github.sha }}
         run: |
           for attempt in $(seq 1 30); do
