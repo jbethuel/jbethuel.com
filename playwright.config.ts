@@ -23,10 +23,10 @@ export default defineConfig({
     },
   ],
   // The specs run against the static export served the way production serves it -
-  // Cloudflare Pages, locally - rather than against `next dev`, which only one
+  // a Cloudflare Worker, locally - rather than against `next dev`, which only one
   // process per checkout may run and which renders pages that never ship.
   webServer: {
-    command: `pnpm build && pnpm exec wrangler pages dev out --port ${PORT}`,
+    command: `pnpm build && pnpm exec wrangler dev --port ${PORT}`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
