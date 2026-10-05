@@ -1,0 +1,12 @@
+// Serves the static export (`out/`) as a Worker with static assets. There is no
+// Worker script: every request is answered from the assets, so none is billed.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jbethuel",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./out",
+    // Pages served `404.html` for unknown paths on its own; Workers needs telling.
+    "not_found_handling": "404-page",
+  },
+}

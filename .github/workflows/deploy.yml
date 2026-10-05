@@ -23,6 +23,9 @@ jobs:
           node-version: 24
           cache: 'pnpm'
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Build App
         run: pnpm build
 
@@ -35,7 +38,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy out --project-name jbethuel --branch=main
+          command: deploy
 
       - name: Verify latest version is live
         env:
