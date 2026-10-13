@@ -9,22 +9,22 @@ import { ThemeCrossfade } from "@/components/theme-crossfade"
 const hackFont = localFont({
   src: [
     {
-      path: "./Hack-Regular.ttf",
+      path: "./Hack-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./Hack-Italic.ttf",
+      path: "./Hack-Italic.woff2",
       weight: "400",
       style: "italic",
     },
     {
-      path: "./Hack-Bold.ttf",
+      path: "./Hack-Bold.woff2",
       weight: "700",
       style: "normal",
     },
     {
-      path: "./Hack-BoldItalic.ttf",
+      path: "./Hack-BoldItalic.woff2",
       weight: "700",
       style: "italic",
     },
