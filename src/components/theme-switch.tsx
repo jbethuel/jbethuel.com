@@ -64,11 +64,13 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="cursor-pointer"
     >
       {isDark ? "☾ dark" : "☀ light"}
+      <span className="sr-only">
+        {isDark ? ", switch to light theme" : ", switch to dark theme"}
+      </span>
     </button>
   )
 }
