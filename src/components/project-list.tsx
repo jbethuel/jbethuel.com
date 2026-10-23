@@ -60,7 +60,10 @@ export function ProjectList() {
           className="gap-2.5 last:min-h-[calc(100dvh-194px)]"
         >
           <SectionHeading aside={<AiAssistTag value={project.aiAssist} />}>
-            <CustomLink href={project.repoUrl} className="underline-offset-4 hover:underline">
+            <CustomLink
+              href={project.repoUrl ?? project.liveUrl}
+              className="underline-offset-4 hover:underline"
+            >
               {project.name}
             </CustomLink>
           </SectionHeading>
@@ -72,9 +75,11 @@ export function ProjectList() {
                 live ↗
               </CustomLink>
             ) : null}
-            <CustomLink href={project.repoUrl} className={LINK}>
-              source ↗
-            </CustomLink>
+            {project.repoUrl ? (
+              <CustomLink href={project.repoUrl} className={LINK}>
+                source ↗
+              </CustomLink>
+            ) : null}
           </div>
         </Section>
       ))}

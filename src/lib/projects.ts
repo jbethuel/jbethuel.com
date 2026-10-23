@@ -1,6 +1,9 @@
 export type AiAssist = "preAi" | "assisted" | "built"
 
-export type Project = {
+// A project links to its source, its live site, or both. A private repo has no source link.
+type ProjectLinks = { repoUrl: string; liveUrl?: string } | { repoUrl?: undefined; liveUrl: string }
+
+export type Project = ProjectLinks & {
   name: string
   // Doubles as the section anchor on /projects.
   id: string
@@ -8,8 +11,6 @@ export type Project = {
   blurb: string
   description: string
   stack: string[]
-  repoUrl: string
-  liveUrl?: string
   aiAssist: AiAssist
 }
 
@@ -28,6 +29,25 @@ export function filterProjects(list: Project[], filter: ProjectFilter): Project[
 }
 
 export const projects: Project[] = [
+  {
+    name: "abogadoph",
+    id: "abogadoph",
+    blurb: "Document generation and appointment booking for Philippine lawyers.",
+    description:
+      "A tool for Philippine lawyers. A lawyer writes a reusable template once, fills in the details for each case, and prints a finished document laid out for long bond paper. Every document keeps a frozen copy of exactly what was printed and is never edited or deleted, since a signed paper copy may already exist, so a mistake is fixed by producing a replacement. Each approved lawyer also gets a public booking page where clients send appointment requests without making an account. Three apps share one Convex backend: a dashboard behind Clerk sign-in, the public booking site, and a static marketing page, each deployed as a Cloudflare Worker.",
+    stack: [
+      "React",
+      "TypeScript",
+      "TanStack Router",
+      "Convex",
+      "Clerk",
+      "Next.js",
+      "Cloudflare Workers",
+      "Playwright",
+    ],
+    liveUrl: "https://abogadoph.app",
+    aiAssist: "built",
+  },
   {
     name: "shouldiapply",
     id: "shouldiapply",
